@@ -3,17 +3,7 @@ Tabela determinística de classificação tributária para frete (CT-e).
 Fonte: LC 214/2025 e Notas Técnicas do CT-e.
 IMPORTANTE: Esta tabela NÃO é gerada por LLM. É um lookup determinístico.
 """
-from typing import Optional
-from pydantic import BaseModel
-
-
-class ResultadoCClassTrib(BaseModel):
-    cclasstrib: Optional[str]
-    aliquota_cbs: Optional[float]   # aliquota CBS
-    aliquota_ibs: Optional[float]   # aliquota IBS
-    aliquota_total: Optional[float] # soma CBS + IBS
-    determinado: bool  # False = requer revisão manual
-    observacao: Optional[str] = None
+from src.schemas.models import ResultadoCClassTrib
 
 
 # Chave: (fase_transicao, regime_tributario, contratado_pessoa_fisica, modal)
