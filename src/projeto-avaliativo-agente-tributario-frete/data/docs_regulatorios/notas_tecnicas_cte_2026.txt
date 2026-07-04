@@ -1,0 +1,246 @@
+NOTAS TÉCNICAS DO CT-e — REFORMA TRIBUTÁRIA IBS/CBS
+Nota Técnica 2025.001 e Cronograma de Transição 2026–2033
+Relevância: Classificação tributária de frete (cClassTrib)
+
+Fonte: Projeto CT-e / Receita Federal do Brasil, ENCAT e Comitê Gestor do IBS.
+Versão de referência: NT CT-e 2025.001 (publicada em 2025, vigência a partir de 03/08/2026).
+
+================================================================================
+SEÇÃO 1 — CONTEXTO REGULATÓRIO
+================================================================================
+
+A Nota Técnica NT CT-e 2025.001 estabelece as alterações no leiaute do Conhecimento de Transporte
+Eletrônico (CT-e) necessárias para suportar a nova sistemática de tributação pelo Imposto sobre
+Bens e Serviços (IBS) e pela Contribuição sobre Bens e Serviços (CBS), criados pela Lei
+Complementar nº 214, de 16 de janeiro de 2025, em decorrência da Emenda Constitucional
+nº 132/2023 (Reforma Tributária).
+
+A partir de 03/08/2026, os CT-e emitidos no Brasil deverão conter, obrigatoriamente (para
+contribuintes do regime regular), os novos campos de IBS e CBS devidamente preenchidos. CT-e
+emitidos sem o preenchimento correto do campo cClassTrib serão rejeitados pela SEFAZ com
+código de erro específico.
+
+================================================================================
+SEÇÃO 2 — NOVOS CAMPOS OBRIGATÓRIOS NO CT-e (NT 2025.001)
+================================================================================
+
+2.1 Campo cClassTrib (Código de Classificação Tributária)
+
+  - Tag XML: <cClassTrib>
+  - Tipo: string alfanumérico
+  - Tamanho: 2 caracteres
+  - Obrigatoriedade: obrigatório para contribuintes do regime regular a partir de 03/08/2026;
+    obrigatório para optantes do Simples Nacional a partir de 01/01/2027; facultativo em 2026
+    para Simples Nacional.
+  - Descrição: código que identifica o enquadramento tributário da operação de transporte para
+    fins de IBS e CBS.
+
+2.2 Campo vCBS (Valor da CBS)
+
+  - Tag XML: <vCBS>
+  - Tipo: decimal, 15 dígitos, 2 casas decimais
+  - Obrigatoriedade: obrigatório quando cClassTrib indicar incidência de CBS
+  - Descrição: valor em reais da CBS destacada no CT-e
+
+2.3 Campo vIBS (Valor do IBS)
+
+  - Tag XML: <vIBS>
+  - Tipo: decimal, 15 dígitos, 2 casas decimais
+  - Obrigatoriedade: obrigatório quando cClassTrib indicar incidência de IBS
+  - Descrição: valor em reais do IBS destacado no CT-e
+
+2.4 Campo pCBS (Percentual da CBS)
+
+  - Tag XML: <pCBS>
+  - Tipo: decimal, 5 dígitos, 4 casas decimais
+  - Descrição: alíquota CBS aplicada na operação (ex.: 0,9000 para 0,9%)
+
+2.5 Campo pIBS (Percentual do IBS)
+
+  - Tag XML: <pIBS>
+  - Tipo: decimal, 5 dígitos, 4 casas decimais
+  - Descrição: alíquota IBS aplicada na operação (ex.: 0,1000 para 0,1%)
+
+2.6 Campo indRespRetIBS (Indicador de Responsável pelo Recolhimento do IBS)
+
+  - Tag XML: <indRespRetIBS>
+  - Tipo: enumerado: "1" = prestador (emissor do CT-e); "2" = tomador (contratante)
+  - Obrigatoriedade: obrigatório quando o responsável pelo recolhimento for o tomador (ex.: TAC)
+  - Descrição: identifica quem tem a obrigação de recolher o IBS ao Comitê Gestor
+
+================================================================================
+SEÇÃO 3 — TABELA DE CÓDIGOS cClassTrib
+================================================================================
+
+Os códigos cClassTrib são definidos pela Nota Técnica e pelo Comitê Gestor do IBS. Os principais
+códigos aplicáveis ao transporte de cargas são:
+
+  Código "01" — Operação tributada pelo IBS e CBS (regime regular, alíquota padrão)
+    - Aplica-se a: transportadoras pessoa jurídica no Lucro Real ou Lucro Presumido
+    - Alíquotas: conforme tabela de transição do Anexo da LC 214/2025 (1% em 2026, progressivo
+      até ~26,5% em 2033)
+    - Recolhimento: pelo prestador (emissor do CT-e)
+
+  Código "02" — Simples Nacional — destaque facultativo (2026)
+    - Aplica-se a: optantes do Simples Nacional que, voluntariamente, escolham destacar IBS/CBS
+      no CT-e durante o exercício de 2026
+    - Alíquotas: mesmas da fase-teste (0,9% CBS + 0,1% IBS = 1,0% total)
+    - Recolhimento: pelo prestador, de forma separada do DAS do Simples Nacional
+    - Atenção: o destaque em 2026 é opcional para o Simples Nacional
+
+  Código "03" — Simples Nacional — destaque obrigatório (a partir de 2027)
+    - Aplica-se a: optantes do Simples Nacional a partir de 01/01/2027
+    - Alíquotas: conforme tabela de transição do ano vigente
+    - Recolhimento: pelo prestador, integrado ao sistema do Simples Nacional conforme
+      regulamentação do Comitê Gestor
+
+  Código "04" — Imunidade / Alíquota zero (transporte internacional de cargas)
+    - Aplica-se a: prestações de serviço de transporte cujo ponto de origem ou destino esteja
+      fora do território nacional (exportação ou importação de cargas)
+    - Alíquotas: CBS = 0%, IBS = 0% (imunidade com manutenção de crédito — art. 8º LC 214/2025)
+    - Recolhimento: não há recolhimento de IBS/CBS pelo prestador; os campos vCBS e vIBS devem
+      conter 0,00
+    - Manutenção de crédito: o prestador mantém direito aos créditos de IBS e CBS sobre insumos
+
+  Código "05" — TAC (Transportador Autônomo de Cargas) — pessoa física não contribuinte
+    - Aplica-se a: prestações realizadas por transportador autônomo pessoa física contratado por
+      pessoa jurídica
+    - Alíquotas no CT-e: CBS = 0%, IBS = 0% no CT-e do TAC, pois o TAC não é o contribuinte
+    - Responsável tributário: o contratante (tomador) pessoa jurídica é responsável pelo
+      recolhimento do IBS e CBS pela operação (substituição tributária — art. 28 LC 214/2025)
+    - Campo indRespRetIBS: "2" (tomador é responsável pelo recolhimento)
+    - Atenção: o contratante deve emitir documento próprio de retenção e recolhimento
+
+================================================================================
+SEÇÃO 4 — CRONOGRAMA DE TRANSIÇÃO 2026–2033 (REGRAS POR ANO)
+================================================================================
+
+4.1 Ano 2026 — Fase-Teste
+
+  Período: 01/01/2026 a 31/12/2026 (com obrigatoriedade de destaque a partir de 03/08/2026)
+  
+  Regime Regular (Lucro Real / Lucro Presumido):
+    - Destaque obrigatório a partir de 03/08/2026
+    - CBS: 0,9% | IBS: 0,1% | Total: 1,0%
+    - cClassTrib: "01"
+    - ICMS e ISS continuam vigentes normalmente
+
+  Simples Nacional:
+    - Destaque FACULTATIVO em todo o ano de 2026
+    - Se optar pelo destaque: CBS 0,9% + IBS 0,1% = 1,0% total, cClassTrib "02"
+    - Se não destacar: não preenche os campos IBS/CBS; DAS normalmente
+
+  Transporte Internacional:
+    - Imunidade plena (cClassTrib "04"), independente do período da fase-teste
+
+  TAC (pessoa física):
+    - cClassTrib "05"; contratante recolhe como responsável
+
+4.2 Ano 2027 — Início do Período de Convivência
+
+  Regime Regular (Lucro Real / Lucro Presumido):
+    - Destaque obrigatório
+    - CBS: 3,6% | IBS: 0,4% | Total: 4,0%
+    - cClassTrib: "01"
+    - ICMS/ISS: continuam coexistindo (período de convivência); haverá redução proporcional do
+      ICMS/ISS estadual conforme legislação específica de cada estado
+
+  Simples Nacional:
+    - Destaque OBRIGATÓRIO a partir de 01/01/2027 (art. 20 §1º LC 214/2025)
+    - Alíquotas: iguais ao regime regular para o mesmo período
+    - cClassTrib: "03"
+    - Recolhimento: DAS continua + recolhimento separado de IBS/CBS (regras do Comitê Gestor)
+
+4.3 Anos 2028–2032 — Progressão das Alíquotas
+
+  As alíquotas de IBS e CBS aumentam progressivamente a cada ano, com redução correspondente
+  do ICMS e ISS, conforme Anexo da LC 214/2025. O cClassTrib permanece "01" (regime regular)
+  ou "03" (Simples Nacional), com variação nas alíquotas e valores.
+
+  Estimativas de alíquota total IBS+CBS por ano:
+    - 2028: ~8,0%
+    - 2029: ~12,0%
+    - 2030: ~16,0%
+    - 2031: ~20,0%
+    - 2032: ~24,0%
+
+4.4 Ano 2033 — Regime Definitivo
+
+  ICMS e ISS são extintos para serviços de transporte de cargas.
+  CBS (~23,4%) + IBS (~2,6%) = ~26,0% (alíquota estimada de referência).
+  O Senado Federal fixará as alíquotas definitivas em Resolução específica.
+
+================================================================================
+SEÇÃO 5 — REGRAS DE PREENCHIMENTO DO CAMPO cClassTrib (RESUMO)
+================================================================================
+
+Decisão 1: O contratado é pessoa física (TAC)?
+  SIM → cClassTrib = "05" | CBS/IBS = 0 no CT-e | indRespRetIBS = "2"
+  NÃO → continuar para Decisão 2
+
+Decisão 2: É transporte internacional de cargas?
+  SIM → cClassTrib = "04" | CBS = 0% | IBS = 0% | manutenção de crédito
+  NÃO → continuar para Decisão 3
+
+Decisão 3: O prestador é optante do Simples Nacional?
+  SIM E ano = 2026 → cClassTrib = "02" (facultativo) OU sem destaque
+  SIM E ano >= 2027 → cClassTrib = "03" (obrigatório)
+  NÃO → continuar para Decisão 4
+
+Decisão 4: Ano da emissão
+  2026 (fase-teste) → cClassTrib = "01" | CBS 0,9% | IBS 0,1% | Total 1,0%
+  2027–2032 → cClassTrib = "01" | alíquotas progressivas conforme Anexo LC 214/2025
+  2033+ → cClassTrib = "01" | alíquotas definitivas conforme Resolução do Senado
+
+================================================================================
+SEÇÃO 6 — EXEMPLOS PRÁTICOS DE CLASSIFICAÇÃO
+================================================================================
+
+Exemplo 1: Transportadora Ltda. (Lucro Real) faz frete rodoviário interno em março/2026
+  Dados: modal = rodoviário | regime = Lucro Real | data = 15/03/2026 | destino = nacional
+  Decisão: não é TAC, não é internacional, não é Simples, é 2026 (fase-teste)
+  cClassTrib = "01" | pCBS = 0,9% | pIBS = 0,1% | Total = 1,0%
+  Observação: destaque obrigatório somente a partir de 03/08/2026; em março/2026, facultativo.
+
+Exemplo 2: Transportadora ME (Simples Nacional) faz frete em outubro/2026
+  Dados: modal = rodoviário | regime = Simples Nacional | data = 20/10/2026
+  Decisão: não é TAC, não é internacional, é Simples Nacional, é 2026 → facultativo
+  Opção A (sem destaque): não preenche campos IBS/CBS; DAS normalmente
+  Opção B (com destaque voluntário): cClassTrib = "02" | pCBS = 0,9% | pIBS = 0,1%
+
+Exemplo 3: Transportadora ME (Simples Nacional) faz frete em fevereiro/2027
+  Dados: modal = rodoviário | regime = Simples Nacional | data = 10/02/2027
+  Decisão: não é TAC, não é internacional, é Simples Nacional, é 2027 → obrigatório
+  cClassTrib = "03" | alíquotas conforme tabela 2027 | destaque obrigatório
+
+Exemplo 4: Empresa de logística (Lucro Presumido) faz frete aéreo para o exterior
+  Dados: modal = aéreo | regime = Lucro Presumido | destino = Miami/EUA
+  Decisão: não é TAC, É transporte internacional → imunidade
+  cClassTrib = "04" | pCBS = 0,0% | pIBS = 0,0% | vCBS = 0,00 | vIBS = 0,00
+  Direito a crédito sobre insumos mantido.
+
+Exemplo 5: TAC (pessoa física) contratado por uma distribuidora para frete rodoviário
+  Dados: contratado = CPF (TAC) | contratante = distribuidora Ltda. (Lucro Real)
+  Decisão: É TAC pessoa física → não contribuinte
+  cClassTrib = "05" | CBS/IBS no CT-e = 0 | indRespRetIBS = "2"
+  A distribuidora é responsável pelo recolhimento do IBS e CBS pela operação.
+
+================================================================================
+SEÇÃO 7 — REJEIÇÕES COMUNS E COMO EVITAR
+================================================================================
+
+Erro 920: cClassTrib ausente ou inválido
+  Causa: campo não preenchido ou código inexistente na tabela vigente
+  Solução: preencher com o código correto conforme as regras da NT 2025.001
+
+Erro 921: Alíquota CBS inconsistente com cClassTrib informado
+  Causa: alíquota pCBS não corresponde ao período/regime indicado pelo cClassTrib
+  Solução: verificar o ano do documento e o regime tributário do emitente
+
+Erro 922: indRespRetIBS obrigatório para TAC não informado
+  Causa: cClassTrib = "05" sem o campo indRespRetIBS = "2"
+  Solução: incluir o campo indRespRetIBS com valor "2" quando cClassTrib = "05"
+
+Erro 923: Operação internacional sem cClassTrib de imunidade
+  Causa: destino fora do país mas cClassTrib informado como "01" ou "02"
+  Solução: verificar o destino e usar cClassTrib = "04" para transporte internacional
