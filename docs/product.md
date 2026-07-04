@@ -13,7 +13,7 @@ reduzindo o risco de rejeição de documentos fiscais pela SEFAZ.
 
 Analista fiscal/operacional de transportadora ou embarcador que precisa classificar rapidamente
 operações de frete no novo sistema tributário. No contexto acadêmico, o próprio desenvolvedor
-(módulo TMS — Gestão de Frete Embarcador / TOTVS Protheus).
+como ferramenta de estudo e portfólio.
 
 ## Funcionalidades principais
 
@@ -23,7 +23,7 @@ operações de frete no novo sistema tributário. No contexto acadêmico, o pró
 - Sugerir código cClassTrib e alíquota via tabela determinística (não gerado por LLM)
 - Gerar justificativa em linguagem natural com citação da base legal
 - Pausar para validação humana antes de finalizar (human-in-the-loop)
-- Exportar resultado em JSON/CSV simulando integração com TMS
+- Exportar resultado em JSON e disponibilizar via API REST para integração com sistemas externos
 
 ## Restrições
 

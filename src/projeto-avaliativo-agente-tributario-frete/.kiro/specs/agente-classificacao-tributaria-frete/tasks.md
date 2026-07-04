@@ -146,16 +146,19 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 ---
 
-## ISSUE-011 — Nó `export_result` + checkpointer SQLite
+## ISSUE-011 — Nó `export_result` + API REST + checkpointer SQLite
 
-**Requisitos:** R7 · **Branch:** `feature/ISSUE-011-export-e-checkpointer`
+**Requisitos:** R7 · **Branch:** `feature/ISSUE-011-export-api-checkpointer`
 
-- [ ] Exportar JSON/CSV do resultado final
-- [ ] Configurar `SqliteSaver`
+- [ ] Exportar resultado em JSON ao aprovar
+- [ ] Implementar API REST com FastAPI: `POST /classificar`, `GET /classificar/{thread_id}/review`, `POST /classificar/{thread_id}/review`
+- [ ] Configurar `SqliteSaver` para persistência de estado por `thread_id`
 
 **Casos de teste:**
 - `test_export_result.py::test_json_contem_campos_obrigatorios`
 - `test_export_result.py::test_checkpoint_persistido`
+- `test_api.py::test_post_classificar_retorna_thread_id`
+- `test_api.py::test_review_endpoint_aprova_resultado`
 
 ---
 

@@ -31,6 +31,7 @@ decisão de classificação com embasamento regulatório real.
 | Persistência de estado | SQLite (`SqliteSaver`) |
 | Validação de schema | Pydantic |
 | Testes | pytest + golden set |
+| API | FastAPI (endpoint REST para integração externa) |
 
 > Sem APIs pagas. Funciona 100% offline.
 
@@ -115,11 +116,12 @@ docs/
 ```
 parse_operacao → retrieve_context → classify_scenario
     → determine_cclasstrib → generate_justification
-    → [human_review] → export_result
+    → [human_review] → export_result → API REST
 ```
 
 O nó `human_review` pausa a execução via `interrupt()` do LangGraph e aguarda aprovação ou
-rejeição. Se rejeitado, o fluxo retorna para `classify_scenario`.
+rejeição. Se rejeitado, o fluxo retorna para `classify_scenario`. O resultado aprovado é
+disponibilizado via endpoint REST para integração com qualquer sistema externo.
 
 ---
 
@@ -145,5 +147,4 @@ Ver `.kiro/steering/workflow.md` para as regras completas. Resumo:
 
 ## Autor
 
-Philippe Bretas — Curso SCTEC / SENAI · Módulo M2.1  
-Contexto profissional: Desenvolvedor TOTVS — Módulo TMS Gestão de Frete Embarcador (Protheus)
+Philippe Bretas — Curso SCTEC / SENAI · Módulo M2.1

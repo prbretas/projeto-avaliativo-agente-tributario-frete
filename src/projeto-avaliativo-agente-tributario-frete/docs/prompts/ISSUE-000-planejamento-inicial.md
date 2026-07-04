@@ -139,3 +139,30 @@ escopo, arquitetura e specs do Kiro para a avaliação M2.1.
 
 **Arquivos afetados:**
 - `docs/prompts/ISSUE-000-planejamento-inicial.md` (este arquivo)
+
+---
+
+## [P08] — 2026-07-04
+
+**Prompt enviado:**
+> Vamos atualizar o projeto, pois eu não quero que vincule nada relacionado a TOTVS e ao ERP TMS, GFE.
+> Não quero vínculos com empresa no meu projeto. Acredito que a melhor forma de conexão seria via API.
+> Diante disso, atualize todo o projeto, o que for necessário.
+
+**Ferramenta/modelo:** Kiro
+
+**Resultado gerado (resumo):**
+- Removidas todas as referências a TOTVS, Protheus, TMS/GFE e Gestão de Frete Embarcador de todos os arquivos.
+- Exportação redesenhada: de "simulação de integração com TMS" para API REST genérica (FastAPI).
+- Seção 8 adicionada ao design.md descrevendo os endpoints REST.
+- ISSUE-011 atualizada para incluir implementação da API (FastAPI).
+- Stack atualizada no README com FastAPI.
+
+**Arquivos afetados:**
+- `.kiro/steering/product.md`
+- `.kiro/specs/agente-classificacao-tributaria-frete/requirements.md`
+- `.kiro/specs/agente-classificacao-tributaria-frete/design.md`
+- `.kiro/specs/agente-classificacao-tributaria-frete/tasks.md`
+- `README.md`
+- `docs/product.md`
+- `docs/meeting-notes.md`

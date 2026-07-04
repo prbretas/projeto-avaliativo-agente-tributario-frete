@@ -76,7 +76,7 @@ class AgentState(TypedDict):
 | `determine_cclasstrib` | `classificacao` | `resultado_cclasstrib: ResultadoCClassTrib` | R4 |
 | `generate_justification` | `classificacao`, `resultado_cclasstrib`, `contexto_recuperado` | `justificativa`, `fontes_citadas` | R5 |
 | `human_review` | tudo acima | `aprovado_por_humano: bool` (via `interrupt()`) | R6 |
-| `export_result` | tudo acima, se aprovado | `resultado_exportado: dict` (grava JSON) | R7 |
+| `export_result` | tudo acima, se aprovado | `resultado_exportado: dict` (grava JSON + expõe via API) | R7 |
 
 Cada nó é uma função pura `def nome_do_no(state: AgentState) -> dict` que retorna apenas as
 chaves que atualiza (padrão de reducer do LangGraph).
@@ -122,7 +122,56 @@ manual (requisito 4.2).
 
 ---
 
-## 7. Rastreabilidade Requisitos → Design
+## 8. API REST — interface de integração
+
+O agente expõe uma API REST leve (FastAPI) para que qualquer sistema externo possa consumir a
+classificação sem depender de integração proprietária.
+
+```
+POST /classificar
+Content-Type: application/json
+
+{
+  "modal": "rodoviario",
+  "origem_uf": "SP",
+  "destino_uf": "RJ",
+  "regime_tributario": "lucro_real",
+  "data_emissao": "2026-09-01",
+  "contratado_pessoa_fisica": false
+}
+```
+
+Resposta:
+
+```json
+{
+  "cclasstrib": "000001",
+  "aliquota_estimada": 0.01,
+  "fase_transicao": "2026_teste",
+  "justificativa": "...",
+  "fontes_citadas": ["LC 214/2025 - Art. 12"],
+  "aprovado_por_humano": true,
+  "thread_id": "abc123"
+}
+```
+
+- O endpoint `POST /classificar` dispara o grafo e aguarda aprovação humana via
+  `GET /classificar/{thread_id}/review` + `POST /classificar/{thread_id}/review`.
+- Persistência de estado via `SqliteSaver` permite retomar ou auditar qualquer execução pelo
+  `thread_id`.
+
+## 9. Rastreabilidade Requisitos → Design
+
+| Requisito | Onde é atendido no design |
+|---|---|
+| R1 | `parse_operacao` + validação Pydantic |
+| R2 | Pipeline RAG (seção 5) + nó `retrieve_context` |
+| R3 | `classify_scenario` + enum `fase_transicao` |
+| R4 | `TABELA_CCLASSTRIB` determinística |
+| R5 | `generate_justification` com `fontes_citadas` obrigatório |
+| R6 | `interrupt()` no nó `human_review` |
+| R7 | `export_result` + API REST (seção 8) + `SqliteSaver` |
+| R8 | `/data/golden_set` + `pytest` (ver `tasks.md`, ISSUE-013) |
 
 | Requisito | Onde é atendido no design |
 |---|---|

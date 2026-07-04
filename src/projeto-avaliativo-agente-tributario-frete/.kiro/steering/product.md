@@ -17,10 +17,10 @@ emitidos sem o correto preenchimento dos campos de IBS/CBS são **rejeitados aut
 SEFAZ. Empresas do regime regular precisam classificar corretamente cada operação; empresas do
 Simples Nacional têm regras diferentes até 2027; transporte internacional e TAC (transportador
 autônomo pessoa física) têm tratamento próprio. Esse é hoje um ponto de atrito operacional real em
-sistemas de gestão de frete/TMS.
+sistemas de gestão de frete e emissão de CT-e.
 
-Este é um projeto acadêmico (mini-projeto individual, avaliação M2.1) que também serve como estudo
-aplicado de LangGraph para uso profissional no contexto de TMS (módulo Gestão de Frete Embarcador).
+Este é um projeto acadêmico (mini-projeto individual, avaliação M2.1) e também um estudo aplicado
+de LangGraph voltado à automação de classificação tributária em operações de transporte de cargas.
 
 ## Público-alvo
 
@@ -39,15 +39,16 @@ aplicado de LangGraph para uso profissional no contexto de TMS (módulo Gestão 
    de apoio (não é o LLM que "inventa" o código).
 5. Gerar uma justificativa em linguagem natural citando a base legal recuperada.
 6. Pausar para validação humana antes de considerar o resultado final (human-in-the-loop).
-7. Exportar o resultado (JSON/CSV) simulando uma integração com um TMS.
+7. Exportar o resultado (JSON/CSV) e disponibilizar via API REST para integração com qualquer
+   sistema externo.
 
 ## Objetivos de negócio / acadêmicos
 
 - Entregar um agente funcional com LangGraph que automatize um processo real (requisito da
   avaliação M2.1, 30% do módulo).
 - Demonstrar domínio de RAG ("documentação viva") aplicado a um problema tributário real e atual.
-- Gerar um artefato de portfólio com valor direto para o trabalho do desenvolvedor no módulo TMS -
-  Gestão de Frete Embarcador da TOTVS (Protheus).
+- Gerar um artefato de portfólio reutilizável e integrável via API em qualquer contexto de
+  gestão de frete ou emissão de documentos fiscais eletrônicos.
 
 ## Métricas de sucesso
 

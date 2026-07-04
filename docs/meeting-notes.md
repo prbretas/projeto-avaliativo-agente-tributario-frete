@@ -11,7 +11,7 @@
 - Uso de LLM local via Ollama (sem custo com API)
 - Human-in-the-loop via `interrupt()` do LangGraph
 - Tabela determinística de cClassTrib (não gerado por LLM)
-- Exportação JSON/CSV simulando integração com TMS
+- Exportar resultado em JSON e disponibilizar via API REST (FastAPI) para integração com qualquer sistema externo
 
 ### Regras de negócio definidas
 

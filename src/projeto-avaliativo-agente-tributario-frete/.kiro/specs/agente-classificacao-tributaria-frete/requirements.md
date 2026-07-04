@@ -115,15 +115,16 @@ fiscais.
 
 ## Requisito 7 — Exportação do resultado
 
-**User Story:** Como usuário, eu quero exportar o resultado da classificação, para simular a
-integração com um sistema de gestão de frete/TMS.
+**User Story:** Como usuário, eu quero exportar o resultado da classificação via API, para que
+qualquer sistema externo possa consumir o resultado sem depender de uma integração proprietária.
 
 ### Acceptance Criteria (EARS)
 
-1. QUANDO o resultado for aprovado, ENTÃO o sistema DEVE exportá-lo em formato JSON (e
-   opcionalmente CSV) contendo: dados da operação, cenário classificado, cClassTrib, alíquota,
-   justificativa e fontes citadas.
-2. O sistema DEVE persistir o estado da execução (checkpointer SQLite) para permitir auditoria
+1. QUANDO o resultado for aprovado, ENTÃO o sistema DEVE exportá-lo em formato JSON contendo:
+   dados da operação, cenário classificado, cClassTrib, alíquota, justificativa e fontes citadas.
+2. O sistema DEVE disponibilizar um endpoint REST (`POST /classificar`) que receba os dados da
+   operação e retorne o resultado da classificação no mesmo formato JSON.
+3. O sistema DEVE persistir o estado da execução (checkpointer SQLite) para permitir auditoria
    posterior da decisão tomada.
 
 ---
@@ -145,8 +146,9 @@ garantir confiabilidade mínima antes da entrega.
 
 ## Fora de escopo (explicitamente não incluído nesta versão)
 
-- Emissão real de CT-e ou integração com SEFAZ.
+- Emissão real de CT-e ou integração direta com SEFAZ.
 - Cálculo de créditos tributários complexos (diesel, pedágio, manutenção) — fica como evolução
   futura.
 - Suporte a idiomas além do português.
 - Interface gráfica além de CLI/notebook simples.
+- Integração com sistemas ERP ou plataformas comerciais específicas.
