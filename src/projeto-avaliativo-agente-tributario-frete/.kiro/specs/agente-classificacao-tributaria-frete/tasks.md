@@ -68,9 +68,9 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R1 · **Branch:** `feature/ISSUE-005-no-parse-operacao`
 
-- [ ] Implementar validação e normalização dos dados de entrada
-- [ ] Tratar campo obrigatório ausente (requisito 1.2)
-- [ ] Tratar data anterior a 01/01/2026 (requisito 1.3)
+- [x] Implementar validação e normalização dos dados de entrada
+- [x] Tratar campo obrigatório ausente (requisito 1.2)
+- [x] Tratar data anterior a 01/01/2026 (requisito 1.3)
 
 **Casos de teste:**
 - `test_parse_operacao.py::test_dados_completos`
