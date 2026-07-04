@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Chroma vector store (gerado na ingestão — não versionar)
+data/chroma_db/
+
+# SQLite checkpoints (gerado em execução)
+*.sqlite
+*.db
+data/checkpoints/
+
+# Ollama (modelos locais — não versionar)
+*.gguf
+*.bin
+
+# Outputs gerados
+data/outputs/
+*.json.bak
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/

@@ -1,0 +1,12 @@
+{
+  "name": "Salvar prompt ao iniciar issue",
+  "version": "1.0.0",
+  "description": "Antes de iniciar a execução de uma task, lembra o desenvolvedor de salvar o prompt em docs/prompts/ e criar a branch correta antes de codificar.",
+  "when": {
+    "type": "preTaskExecution"
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "Uma nova task do spec 'agente-classificacao-tributaria-frete' está prestes a começar. Antes de escrever qualquer código: 1) identifique o número da ISSUE correspondente em tasks.md; 2) crie o arquivo docs/prompts/ISSUE-XXX-slug-curto.md seguindo o template em docs/prompts/README.md, registrando o prompt que motivou esta task; 3) confirme que existe uma branch feature/ISSUE-XXX-slug-curto criada a partir da main atualizada. Só depois disso inicie a implementação."
+  }
+}

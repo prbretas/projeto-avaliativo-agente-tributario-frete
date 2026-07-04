@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Git pre-commit hook - bloqueia o commit se a suite de testes falhar.
+# Ativar uma vez por clone com: git config core.hooksPath .githooks
+# Tornar executavel com: chmod +x .githooks/pre-commit
+
+echo "Rodando pytest antes do commit..."
+
+pytest -q
+RESULT=$?
+
+if [ $RESULT -ne 0 ]; then
+  echo ""
+  echo "Commit bloqueado: existem testes falhando."
+  echo "Corrija os testes ou rode 'git commit --no-verify' apenas em casos excepcionais."
+  exit 1
+fi
+
+echo "Todos os testes passaram. Prosseguindo com o commit."
+exit 0
