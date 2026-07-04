@@ -83,7 +83,7 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R2 · **Branch:** `feature/ISSUE-006-no-retrieve-context`
 
-- [ ] Consultar Chroma a partir dos dados da operação
+- [x] Consultar Chroma a partir dos dados da operação
 - [ ] Sinalizar `contexto_insuficiente` quando score abaixo do mínimo (requisito 2.2)
 
 **Casos de teste:**
