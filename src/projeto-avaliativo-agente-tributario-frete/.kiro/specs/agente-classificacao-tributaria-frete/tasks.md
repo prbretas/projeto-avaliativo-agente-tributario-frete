@@ -14,10 +14,10 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R1 (pré-condição) · **Branch:** `feature/ISSUE-001-setup-ambiente`
 
-- [-] Criar venv, instalar `langgraph`, `langchain`, `langchain-ollama`, `chromadb`, `pydantic`, `pytest`
-- [~] Instalar Ollama + baixar `llama3.1:8b` e `nomic-embed-text`
-- [~] Criar estrutura de pastas conforme `.kiro/steering/structure.md`
-- [~] Configurar `.githooks/pre-commit` (`git config core.hooksPath .githooks`)
+- [x] Criar venv, instalar `langgraph`, `langchain`, `langchain-ollama`, `chromadb`, `pydantic`, `pytest`
+- [x] Instalar Ollama + baixar `llama3.1:8b` e `nomic-embed-text`
+- [x] Criar estrutura de pastas conforme `.kiro/steering/structure.md`
+- [x] Configurar `.githooks/pre-commit` (`git config core.hooksPath .githooks`)
 
 **Casos de teste:**
 - `test_environment.py::test_ollama_responde` — chamada simples ao modelo local retorna texto não vazio.

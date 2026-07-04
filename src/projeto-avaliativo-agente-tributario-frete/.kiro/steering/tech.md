@@ -9,7 +9,7 @@ inclusion: always
 - **Linguagem:** Python 3.11+
 - **Orquestração de agente:** LangGraph (StateGraph, checkpointer, `interrupt()` para
   human-in-the-loop)
-- **LLM:** Ollama local (modelo padrão: `llama3.1:8b`; alternativa mais leve: `mistral`).
+- **LLM:** Ollama local (modelo padrão: `llama3.2:latest` — instalado localmente; alternativa: `llama3:latest`).
   Não usar APIs pagas (OpenAI/Anthropic) neste projeto — restrição deliberada do autor.
 - **Embeddings:** `nomic-embed-text` via Ollama
 - **Vector store:** Chroma (persistente, local, sem custo)
