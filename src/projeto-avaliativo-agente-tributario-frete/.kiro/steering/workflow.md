@@ -7,56 +7,111 @@ inclusion: always
 Esta é a regra operacional do projeto. O Kiro (e qualquer pessoa) deve seguir isto ao trabalhar
 em qualquer issue de `tasks.md`.
 
-## 1. Uma branch por issue (GitHub Flow)
+---
 
-- `main` deve estar sempre em estado funcional (deployável/executável).
-- Para cada issue de `tasks.md`, criar uma branch a partir de `main` atualizada:
-  `feature/ISSUE-XXX-slug-curto` (ex.: `feature/ISSUE-005-no-parse-operacao`).
-- Commits seguem Conventional Commits, referenciando a issue:
-  `feat(ISSUE-005): implementa validação de operacao`
-  `test(ISSUE-005): adiciona testes de campo faltante`
-- Ao concluir, abrir Pull Request de `feature/ISSUE-XXX-*` para `main`.
-- PR só pode ser mesclado se todos os testes da issue estiverem passando.
-- Preferir squash merge; apagar a branch após o merge.
+## 1. Ciclo obrigatório por issue — BRANCH → COMMIT → PUSH → PR → MERGE
 
-## 2. Log de prompts obrigatório por issue
+**Este fluxo é OBRIGATÓRIO para cada issue. Nenhuma etapa pode ser pulada.**
 
-- **Antes do primeiro commit de uma issue** (ou seja, no momento em que a issue entra na coluna
-  "Desenvolvimento" do Kanban), o(s) prompt(s) usados para gerar/guiar aquele trabalho DEVEM ser
-  salvos em `docs/prompts/ISSUE-XXX-slug-curto.md`, seguindo o template de
-  `docs/prompts/README.md`.
-- Isso vale tanto para prompts enviados ao Kiro quanto a qualquer outro assistente de IA usado no
-  desenvolvimento da issue.
-- O arquivo de prompt da issue deve ser commitado junto com o primeiro commit de código daquela
-  branch (mesmo commit ou commit imediatamente anterior).
+```
+git checkout main
+git pull origin main
+git checkout -b feature/ISSUE-XXX-slug-curto   ← branch nova a partir do main atualizado
+# ... implementação + testes ...
+git add <arquivos>
+git commit -m "feat(ISSUE-XXX): descrição"
+git push -u origin feature/ISSUE-XXX-slug-curto
+gh pr create --base main --head feature/ISSUE-XXX-slug-curto ...
+gh pr merge <numero> --squash --delete-branch
+git checkout main
+git pull origin main                             ← sincroniza o main local antes da próxima issue
+```
 
-## 3. Gate de testes antes do commit
+### Regras críticas
 
-- Nenhuma issue é considerada "pronta para revisão" sem casos de teste correspondentes em
-  `/tests`, conforme listado em cada issue de `tasks.md`.
-- O repositório usa um git hook local (`.githooks/pre-commit`) que roda `pytest` automaticamente
-  e **bloqueia o commit** se algum teste falhar. Ativar uma vez por clone com:
+- `main` deve estar sempre em estado funcional (testado, sem erros).
+- Cada issue tem **exatamente uma branch**. Nunca commitar diretamente na `main`.
+- A branch deve ser criada a partir do `main` já atualizado (`git pull` antes do `checkout -b`).
+- Nunca começar uma nova issue sem antes mergear e deletar a branch da issue anterior.
+- Após o merge, sempre fazer `git checkout main && git pull origin main` antes de criar a branch da próxima issue.
+- Squash merge (`--squash`): mantém o histórico da main limpo.
+- Deletar a branch remota após o merge (`--delete-branch`).
+
+---
+
+## 2. Nomenclatura de branches
+
+```
+feature/ISSUE-XXX-slug-curto
+```
+
+Exemplos:
+- `feature/ISSUE-005-no-parse-operacao`
+- `feature/ISSUE-008-no-determine-cclasstrib`
+- `feature/ISSUE-012-montagem-grafo`
+
+---
+
+## 3. Conventional Commits
+
+Referenciando sempre o número da issue:
+
+```
+feat(ISSUE-XXX): implementa funcionalidade
+test(ISSUE-XXX): adiciona testes
+fix(ISSUE-XXX): corrige comportamento
+chore(ISSUE-XXX): ajusta configuração
+docs(ISSUE-XXX): atualiza documentação
+```
+
+---
+
+## 4. Gate de testes antes do commit
+
+- Nenhuma issue é "pronta para revisão" sem os casos de teste correspondentes em `/tests`.
+- Rodar `pytest tests/ -v` com `.venv\Scripts\python.exe -m pytest` antes de qualquer commit.
+- O `.githooks/pre-commit` bloqueia commits com testes falhando. Ativar uma vez por clone:
   ```
   git config core.hooksPath .githooks
   ```
-- Dentro do Kiro, ao concluir uma task de spec, pedir explicitamente para "rodar os testes da
-  issue antes de finalizar" — não confiar apenas no hook local durante a sessão de
-  desenvolvimento assistido.
 
-## 4. Kanban
+---
 
-- Quadro definido em `docs/kanban.md` com as colunas: **Backlog → Refinamento → Desenvolvimento →
-  Bloqueado → Teste de Aceitação → Concluído**.
+## 5. Log de prompts obrigatório por issue
+
+- Antes do primeiro commit de uma issue, salvar o prompt usado em:
+  `docs/prompts/ISSUE-XXX-slug-curto.md`
+- Seguir o template em `docs/prompts/README.md`.
+- Commitar junto com o primeiro commit de código da branch.
+
+---
+
+## 6. Kanban
+
+- Colunas: **Backlog → Refinamento → Desenvolvimento → Bloqueado → Teste de Aceitação → Concluído**
 - Toda issue nasce em Backlog.
-- Mover para Desenvolvimento só depois de: (a) branch criada, (b) prompt inicial salvo em
-  `docs/prompts/`.
-- Mover para Bloqueado sempre que houver dependência não resolvida (ex.: ISSUE-007 depende de
-  ISSUE-003 e ISSUE-004 estarem concluídas).
-- Mover para Teste de Aceitação quando o PR estiver aberto e os testes automatizados passando.
-- Mover para Concluído somente após o merge em `main`.
+- Mover para Desenvolvimento só depois de: branch criada + prompt salvo.
+- Mover para Bloqueado quando houver dependência não resolvida.
+- Mover para Teste de Aceitação quando PR aberto e testes passando.
+- Mover para Concluído somente após merge em `main`.
 
-## 5. Ordem de dependência entre issues
+---
 
-`ISSUE-001` → `ISSUE-002`/`ISSUE-004` (paralelas) → `ISSUE-003` → `ISSUE-005`..`ISSUE-011`
-(podem ser paralelas entre si, pois cada nó é isolado) → `ISSUE-012` (precisa de todas as
-anteriores) → `ISSUE-013` → `ISSUE-014`.
+## 7. Ordem de dependência entre issues
+
+```
+ISSUE-001
+  ↓
+ISSUE-002 ──┐
+            ├→ ISSUE-003
+ISSUE-004 ──┘
+  ↓
+ISSUE-005, ISSUE-006, ISSUE-007, ISSUE-008, ISSUE-009, ISSUE-010, ISSUE-011
+(podem rodar em paralelo — cada nó é isolado)
+  ↓
+ISSUE-012 (precisa de todas as anteriores)
+  ↓
+ISSUE-013
+  ↓
+ISSUE-014
+```
