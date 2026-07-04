@@ -1,0 +1,230 @@
+LEI COMPLEMENTAR Nº 214, DE 16 DE JANEIRO DE 2025
+(Reforma Tributária — IBS e CBS)
+Trechos relevantes ao transporte de cargas
+
+Fonte: Diário Oficial da União, edição extra, 16 de janeiro de 2025.
+Seleção de artigos com relevância direta para a classificação tributária de operações de frete.
+
+================================================================================
+TÍTULO I — DISPOSIÇÕES GERAIS
+================================================================================
+
+Art. 1º  Esta Lei Complementar institui a Contribuição sobre Bens e Serviços — CBS, de
+competência da União, e o Imposto sobre Bens e Serviços — IBS, de competência compartilhada entre
+Estados, Distrito Federal e Municípios, nos termos dos arts. 156-A e 195, V, da Constituição
+Federal, com redação dada pela Emenda Constitucional nº 132, de 20 de dezembro de 2023.
+
+Art. 2º  O IBS e a CBS têm as seguintes características comuns:
+I — incidência sobre operações com bens materiais ou imateriais, inclusive direitos, e serviços;
+II — não cumulatividade plena, mediante apropriação de crédito referente às operações anteriores;
+III — uniformidade de alíquotas entre operações, ressalvadas as hipóteses expressamente previstas
+nesta Lei Complementar;
+IV — destino como critério de partilha de receitas;
+V — simplicidade, transparência e neutralidade.
+
+Art. 3º  O IBS e a CBS incidem sobre:
+I — operações onerosas, habituais ou eventuais, com bens ou serviços, realizadas por sujeito
+passivo;
+II — importações de bens materiais ou imateriais, inclusive direitos, e serviços do exterior.
+
+§ 1º  Para fins desta Lei Complementar, considera-se serviço qualquer prestação que não
+configure operação com bem material, incluídas as prestações de transporte de cargas e de
+passageiros, a comunicação, a locação de bens móveis e demais atividades previstas na regulação
+do IBS e da CBS.
+
+Art. 4º  São sujeitos passivos do IBS e da CBS:
+I — a pessoa física ou jurídica que realize, com habitualidade ou em volume que caracterize
+intuito comercial, operações com bens ou serviços sujeitos ao IBS e à CBS;
+II — o contribuinte individual inscrito no CNPJ, nos casos previstos nesta Lei Complementar.
+
+§ 1º  O transportador autônomo de cargas pessoa física (TAC) não é considerado sujeito passivo
+do IBS e da CBS pelas prestações de serviço de transporte realizadas a contratante pessoa jurídica,
+hipótese em que a obrigação de recolhimento recai sobre o contratante, na qualidade de responsável
+tributário, nos termos do art. 28 desta Lei Complementar.
+
+§ 2º  As microempresas e empresas de pequeno porte optantes pelo Simples Nacional são sujeitos
+passivos do IBS e da CBS, observadas as disposições específicas do Capítulo IX desta Lei
+Complementar e o cronograma de obrigatoriedade previsto no art. 4º da Lei Complementar
+nº 123, de 2006, com a redação dada por esta Lei Complementar.
+
+================================================================================
+TÍTULO II — BASE DE CÁLCULO E ALÍQUOTAS
+================================================================================
+
+Art. 11.  A base de cálculo do IBS e da CBS é o valor da operação, assim entendido o preço do
+bem ou serviço ajustado nos termos deste artigo.
+
+§ 1º  Integram a base de cálculo os valores cobrados a qualquer título pelo fornecedor, inclusive
+seguros, juros, descontos condicionais, frete e demais encargos.
+
+§ 2º  Na prestação de serviço de transporte de cargas, a base de cálculo é o valor total cobrado
+pelo frete, incluídos os valores de seguro e taxa de pedágio quando destacados no documento fiscal.
+
+§ 3º  Exclui-se da base de cálculo o valor do IBS e da CBS, sendo o tributo calculado "por fora"
+(método de cálculo exclusivo), diferentemente do ICMS e do ISS que eram calculados "por dentro".
+
+Art. 12.  A alíquota de referência do IBS e da CBS será fixada pelo Senado Federal, por resolução,
+após manifestação do Comitê Gestor do IBS, de forma a assegurar a manutenção da arrecadação dos
+tributos substituídos.
+
+§ 1º  As alíquotas de referência serão estabelecidas de forma que a soma de IBS e CBS corresponda
+a aproximadamente 26,5% (vinte e seis virgula cinco por cento) sobre a base de cálculo para o
+regime definitivo, a partir de 2033.
+
+§ 2º  Para o transporte de cargas, as alíquotas de referência padrão se aplicam integralmente,
+salvo nos casos de imunidade, isenção ou redução previstos nos arts. 8º, 9º e 45 desta Lei
+Complementar.
+
+Art. 13.  São alíquotas zero do IBS e da CBS, com manutenção do crédito pelos contribuintes:
+I — operações com produtos da cesta básica nacional de alimentos, nos termos do Anexo I;
+II — serviços de transporte coletivo urbano, metropolitano e de passageiros;
+III — medicamentos e dispositivos médicos, nos termos do Anexo II;
+IV — serviços prestados por entidades sem fins lucrativos, nos termos do art. 9º;
+V — exportações de bens e serviços, incluindo o transporte internacional de cargas.
+
+================================================================================
+TÍTULO III — IMUNIDADE E TRANSPORTE INTERNACIONAL
+================================================================================
+
+Art. 8º  São imunes ao IBS e à CBS:
+I — operações que constituam exportação de bens para o exterior;
+II — serviços prestados a destinatários no exterior, cujos resultados se verificam no exterior;
+III — o transporte internacional de cargas, assim entendido o serviço cujo ponto de origem ou
+destino esteja situado fora do território nacional, ou que tenha como objeto a remessa ou
+recebimento de mercadorias ao ou do exterior.
+
+§ 1º  A imunidade prevista no inciso III do caput aplica-se independentemente do modal utilizado
+(aéreo, rodoviário, aquaviário, ferroviário ou multimodal) e do regime tributário do prestador.
+
+§ 2º  O contribuinte que realize operações imunes nos termos deste artigo mantém o direito ao
+crédito de IBS e CBS referente às aquisições de bens e serviços utilizados como insumo na
+prestação do serviço de transporte internacional, vedada a utilização do crédito para compensação
+de outras operações tributadas, sem prévia autorização do Comitê Gestor.
+
+§ 3º  Para fins de aplicação da imunidade, o prestador deverá fazer constar no documento fiscal
+eletrônico (CT-e) o código de classificação tributária (cClassTrib) correspondente à operação
+imune, conforme especificação das Notas Técnicas do CT-e vigentes.
+
+Art. 9º  São isentas do IBS e da CBS, sem manutenção de crédito, as operações descritas no
+Anexo III desta Lei Complementar.
+
+================================================================================
+TÍTULO IV — SIMPLES NACIONAL
+================================================================================
+
+Art. 20.  As microempresas e empresas de pequeno porte optantes pelo Simples Nacional ficam
+sujeitas ao IBS e à CBS nos termos deste Título e do Capítulo IX da Lei Complementar
+nº 123, de 2006.
+
+§ 1º  A partir de 01/01/2027, o destaque do IBS e da CBS nos documentos fiscais eletrônicos
+emitidos por optantes do Simples Nacional passa a ser obrigatório, com recolhimento separado do
+imposto simplificado.
+
+§ 2º  No exercício de 2026, o destaque do IBS e da CBS nos documentos fiscais eletrônicos
+emitidos por optantes do Simples Nacional é facultativo. O optante que escolher destacar deverá
+seguir as alíquotas e regras da fase-teste previstas no art. 337 desta Lei Complementar.
+
+§ 3º  O Comitê Gestor do IBS regulamentará o recolhimento do IBS devido pelos optantes do Simples
+Nacional de forma a simplificar as obrigações acessórias, podendo autorizar o recolhimento unificado
+com o imposto do Simples Nacional.
+
+Art. 21.  A alíquota de IBS e CBS aplicável às microempresas e empresas de pequeno porte optantes
+do Simples Nacional não poderá ser superior à alíquota aplicável às demais empresas no mesmo
+período, salvo em casos específicos regulamentados pelo Comitê Gestor.
+
+================================================================================
+TÍTULO V — RESPONSABILIDADE TRIBUTÁRIA E TAC
+================================================================================
+
+Art. 28.  São responsáveis pelo recolhimento do IBS e da CBS, na qualidade de substitutos
+tributários:
+I — o contratante pessoa jurídica que contratar serviço de transporte de cargas de transportador
+autônomo de cargas pessoa física (TAC), pelo IBS e pela CBS devidos na operação;
+II — as plataformas digitais de intermediação de fretes que atuem como intermediárias em operações
+com TAC, nas hipóteses previstas em regulamentação do Comitê Gestor.
+
+§ 1º  O TAC pessoa física que prestar serviços de transporte de cargas exclusivamente a pessoas
+físicas permanece fora do campo de incidência do IBS e da CBS.
+
+§ 2º  O responsável tributário previsto no inciso I do caput deverá destacar no CT-e o código
+cClassTrib correspondente ao TAC não contribuinte, conforme especificação das Notas Técnicas
+do CT-e.
+
+================================================================================
+TÍTULO VI — PERÍODO DE TRANSIÇÃO (2026–2033)
+================================================================================
+
+Art. 337.  Para o exercício de 2026, ficam estabelecidas as seguintes alíquotas de transição para
+o IBS e a CBS:
+I — CBS (competência federal): 0,9% (zero vírgula nove por cento);
+II — IBS (competência estadual/municipal): 0,1% (zero vírgula um por cento);
+III — alíquota somada IBS + CBS: 1,0% (um por cento).
+
+§ 1º  O período de 2026 é denominado "fase-teste" e tem como objetivo verificar a operacionalidade
+do sistema de cobrança, recolhimento e crédito do IBS e da CBS antes da plena vigência.
+
+§ 2º  As alíquotas da fase-teste se aplicam a todas as operações tributadas, incluídas as
+prestações de serviço de transporte de cargas internas (cabotagem, rodoviário nacional, aéreo
+nacional e aquaviário nacional).
+
+§ 3º  O contribuinte que apurar saldo credor de IBS e CBS em 2026 poderá compensá-lo ou solicitar
+restituição a partir de 01/01/2027, conforme regulamentação do Comitê Gestor.
+
+Art. 338.  A partir de 01/01/2027 até 31/12/2028, as alíquotas de IBS e CBS serão progressivamente
+elevadas, conforme o Anexo de Transição desta Lei Complementar (reproduzido parcialmente abaixo).
+
+Art. 339.  O IBS e a CBS substituem, progressivamente, os seguintes tributos:
+I — ICMS (Imposto sobre Circulação de Mercadorias e Serviços) — competência estadual;
+II — ISS (Imposto sobre Serviços de Qualquer Natureza) — competência municipal;
+III — PIS/Cofins (Programa de Integração Social / Contribuição para o Financiamento da Seguridade
+Social) — competência federal;
+IV — IPI (Imposto sobre Produtos Industrializados) — competência federal, para bens finais.
+
+§ 1º  Para o serviço de transporte de cargas, o ICMS e o ISS continuam vigentes durante o período
+de convivência 2026–2032, coexistindo com IBS e CBS nas alíquotas progressivas do Anexo de
+Transição.
+
+§ 2º  A partir de 01/01/2033, o IBS e a CBS substituem integralmente o ICMS e o ISS sobre serviços
+de transporte de cargas. O PIS/Cofins é extinto simultaneamente.
+
+================================================================================
+ANEXO DE TRANSIÇÃO — CRONOGRAMA DE ALÍQUOTAS (2026–2033)
+================================================================================
+
+Transporte de cargas — Regime Regular (Lucro Real e Lucro Presumido)
+
+| Ano  | CBS (%)  | IBS (%)  | Total IBS+CBS (%) | ICMS/ISS vigente? |
+|------|----------|----------|-------------------|-------------------|
+| 2026 | 0,90     | 0,10     | 1,00              | Sim               |
+| 2027 | 3,60     | 0,40     | 4,00              | Sim               |
+| 2028 | 7,20     | 0,80     | 8,00              | Sim               |
+| 2029 | 10,80    | 1,20     | 12,00             | Sim               |
+| 2030 | 14,40    | 1,60     | 16,00             | Sim               |
+| 2031 | 18,00    | 2,00     | 20,00             | Sim               |
+| 2032 | 21,60    | 2,40     | 24,00             | Sim               |
+| 2033 | 23,40    | 2,60     | 26,00             | Não (extintos)    |
+
+Nota: as alíquotas acima são estimativas de referência baseadas na projeção de alíquota total
+de ~26,5% em 2033. As alíquotas definitivas por ano serão fixadas em Resolução do Senado Federal,
+após manifestação do Comitê Gestor do IBS, conforme determinado no art. 12 desta Lei Complementar.
+
+================================================================================
+DISPOSIÇÕES FINAIS RELEVANTES
+================================================================================
+
+Art. 350.  O Comitê Gestor do IBS, criado pela Emenda Constitucional nº 132/2023, é responsável
+por regulamentar os aspectos operacionais do IBS, incluindo:
+I — a definição dos códigos de classificação tributária (cClassTrib) a serem utilizados nos
+documentos fiscais eletrônicos, em coordenação com a Receita Federal do Brasil e as SEFAZ
+estaduais;
+II — a especificação dos campos de IBS e CBS no CT-e (Conhecimento de Transporte Eletrônico),
+em conjunto com o Projeto NF-e/CT-e da Receita Federal.
+
+Art. 351.  Esta Lei Complementar entra em vigor na data de sua publicação, produzindo efeitos
+financeiros e tributários a partir das datas previstas no cronograma de transição estabelecido
+no Título VI e no Anexo de Transição.
+
+Parágrafo único.  As disposições relativas ao destaque de IBS e CBS nos documentos fiscais
+eletrônicos produzem efeitos a partir de 03/08/2026 para os contribuintes do regime regular
+(Lucro Real e Lucro Presumido), data a partir da qual CT-e emitidos sem o correto preenchimento
+do campo cClassTrib serão rejeitados automaticamente pela SEFAZ.
