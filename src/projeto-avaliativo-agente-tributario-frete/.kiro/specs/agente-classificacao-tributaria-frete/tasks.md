@@ -28,9 +28,9 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R2 · **Branch:** `feature/ISSUE-002-base-regulatoria`
 
-- [~] Reunir trechos da LC 214/2025 relevantes a transporte de cargas
-- [~] Reunir resumos das Notas Técnicas do CT-e (NT 2025.001) e cronograma 2026–2033
-- [~] Montar `TABELA_CCLASSTRIB` inicial (mínimo 8 combinações cobrindo os cenários do requisito 3)
+- [x] Reunir trechos da LC 214/2025 relevantes a transporte de cargas
+- [x] Reunir resumos das Notas Técnicas do CT-e (NT 2025.001) e cronograma 2026–2033
+- [x] Montar `TABELA_CCLASSTRIB` inicial (mínimo 8 combinações cobrindo os cenários do requisito 3)
 
 **Casos de teste:**
 - `test_tabela_cclasstrib.py::test_tabela_nao_vazia`
@@ -42,9 +42,9 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R2 · **Branch:** `feature/ISSUE-003-pipeline-rag`
 
-- [~] Implementar chunking dos documentos de `/data/docs_regulatorios`
-- [~] Gerar embeddings com `nomic-embed-text`
-- [~] Indexar no Chroma (`/data/chroma_db`)
+- [ ] Implementar chunking dos documentos de `/data/docs_regulatorios`
+- [ ] Gerar embeddings com `nomic-embed-text`
+- [ ] Indexar no Chroma (`/data/chroma_db`)
 
 **Casos de teste:**
 - `test_rag_pipeline.py::test_indexacao_gera_chunks`
@@ -56,7 +56,7 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** design.md seção 2 · **Branch:** `feature/ISSUE-004-schemas`
 
-- [~] Implementar `Operacao`, `TrechoRecuperado`, `Classificacao`, `ResultadoCClassTrib`, `AgentState`
+- [ ] Implementar `Operacao`, `TrechoRecuperado`, `Classificacao`, `ResultadoCClassTrib`, `AgentState`
 
 **Casos de teste:**
 - `test_schemas.py::test_operacao_valida`
@@ -68,9 +68,9 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R1 · **Branch:** `feature/ISSUE-005-no-parse-operacao`
 
-- [~] Implementar validação e normalização dos dados de entrada
-- [~] Tratar campo obrigatório ausente (requisito 1.2)
-- [~] Tratar data anterior a 01/01/2026 (requisito 1.3)
+- [ ] Implementar validação e normalização dos dados de entrada
+- [ ] Tratar campo obrigatório ausente (requisito 1.2)
+- [ ] Tratar data anterior a 01/01/2026 (requisito 1.3)
 
 **Casos de teste:**
 - `test_parse_operacao.py::test_dados_completos`
@@ -83,8 +83,8 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R2 · **Branch:** `feature/ISSUE-006-no-retrieve-context`
 
-- [~] Consultar Chroma a partir dos dados da operação
-- [~] Sinalizar `contexto_insuficiente` quando score abaixo do mínimo (requisito 2.2)
+- [ ] Consultar Chroma a partir dos dados da operação
+- [ ] Sinalizar `contexto_insuficiente` quando score abaixo do mínimo (requisito 2.2)
 
 **Casos de teste:**
 - `test_retrieve_context.py::test_retorna_trechos_relevantes`
@@ -96,7 +96,7 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R3 · **Branch:** `feature/ISSUE-007-no-classify-scenario`
 
-- [~] Implementar as 5 regras de classificação (fase-teste 2026, Simples Nacional 2026 vs 2027+, transporte internacional, TAC pessoa física)
+- [ ] Implementar as 5 regras de classificação (fase-teste 2026, Simples Nacional 2026 vs 2027+, transporte internacional, TAC pessoa física)
 
 **Casos de teste (um por regra do requisito 3):**
 - `test_classify_scenario.py::test_fase_teste_2026`
@@ -111,8 +111,8 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R4 · **Branch:** `feature/ISSUE-008-no-determine-cclasstrib`
 
-- [~] Consultar `TABELA_CCLASSTRIB`
-- [~] Retornar `determinado=False` quando não houver correspondência (requisito 4.2)
+- [ ] Consultar `TABELA_CCLASSTRIB`
+- [ ] Retornar `determinado=False` quando não houver correspondência (requisito 4.2)
 
 **Casos de teste:**
 - `test_determine_cclasstrib.py::test_combinacao_conhecida`
@@ -124,8 +124,8 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R5 · **Branch:** `feature/ISSUE-009-no-generate-justification`
 
-- [~] Prompt com `structured_output` (Pydantic) citando `fontes_citadas`
-- [~] Retry único em caso de falha de formato (requisito 5.3)
+- [ ] Prompt com `structured_output` (Pydantic) citando `fontes_citadas`
+- [ ] Retry único em caso de falha de formato (requisito 5.3)
 
 **Casos de teste:**
 - `test_generate_justification.py::test_justificativa_contem_fonte`
@@ -137,8 +137,8 @@ Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steeri
 
 **Requisitos:** R6 · **Branch:** `feature/ISSUE-010-no-human-review`
 
-- [~] Implementar `interrupt()` do LangGraph
-- [~] Fluxo de rejeição volta para `classify_scenario`
+- [ ] Implementar `interrupt()` do LangGraph
+- [ ] Fluxo de rejeição volta para `classify_scenario`
 
 **Casos de teste:**
 - `test_human_review.py::test_interrupt_pausa_execucao`
