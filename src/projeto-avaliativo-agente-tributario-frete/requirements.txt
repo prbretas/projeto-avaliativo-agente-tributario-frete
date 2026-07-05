@@ -3,6 +3,7 @@
 
 # Orquestração do agente
 langgraph>=0.2.0
+langgraph-checkpoint-sqlite>=2.0.10
 
 # LLM e integrações
 langchain>=0.2.0
