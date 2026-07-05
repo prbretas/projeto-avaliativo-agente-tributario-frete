@@ -35,7 +35,7 @@ git pull origin main                             ← sincroniza o main local ant
 - Nunca começar uma nova issue sem antes mergear e deletar a branch da issue anterior.
 - Após o merge, sempre fazer `git checkout main && git pull origin main` antes de criar a branch da próxima issue.
 - Squash merge (`--squash`): mantém o histórico da main limpo.
-- Deletar a branch remota após o merge (`--delete-branch`).
+- **Não deletar branches após o merge** — o desenvolvedor remove quando quiser.
 
 ---
 
