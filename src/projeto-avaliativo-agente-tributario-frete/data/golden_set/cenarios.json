@@ -1,0 +1,275 @@
+[
+  {
+    "id": "GS-001",
+    "descricao": "Regime regular (Lucro Real) - rodoviário - 2026 fase-teste",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "SP",
+      "destino_uf": "RJ",
+      "regime_tributario": "lucro_real",
+      "data_emissao": "2026-09-15",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2026_teste",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "01",
+      "aliquota_total": 0.01
+    }
+  },
+  {
+    "id": "GS-002",
+    "descricao": "Simples Nacional - rodoviário - 2026 - destaque facultativo",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "MG",
+      "destino_uf": "SP",
+      "regime_tributario": "simples_nacional",
+      "data_emissao": "2026-03-10",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2026_teste",
+      "obrigatoriedade_destaque": false,
+      "cclasstrib": "02",
+      "aliquota_total": 0.0
+    }
+  },
+  {
+    "id": "GS-003",
+    "descricao": "Simples Nacional - rodoviário - 2027 - destaque obrigatório",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "RS",
+      "destino_uf": "SC",
+      "regime_tributario": "simples_nacional",
+      "data_emissao": "2027-03-01",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2027_2032_convivencia",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "03",
+      "aliquota_total": 0.01
+    }
+  },
+  {
+    "id": "GS-004",
+    "descricao": "Transporte internacional - Lucro Real - imunidade",
+    "operacao": {
+      "modal": "internacional",
+      "origem_uf": "SP",
+      "destino_uf": "EX",
+      "regime_tributario": "lucro_real",
+      "data_emissao": "2026-07-20",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "regime_especial",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "04",
+      "aliquota_total": 0.0
+    }
+  },
+  {
+    "id": "GS-005",
+    "descricao": "TAC (pessoa física) - Lucro Real - não contribuinte",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "GO",
+      "destino_uf": "DF",
+      "regime_tributario": "lucro_real",
+      "data_emissao": "2026-05-12",
+      "contratado_pessoa_fisica": true
+    },
+    "esperado": {
+      "fase_transicao": "regime_especial",
+      "obrigatoriedade_destaque": false,
+      "cclasstrib": "05",
+      "aliquota_total": 0.0
+    }
+  },
+  {
+    "id": "GS-006",
+    "descricao": "Lucro Presumido - rodoviário - 2026 fase-teste",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "BA",
+      "destino_uf": "SE",
+      "regime_tributario": "lucro_presumido",
+      "data_emissao": "2026-11-01",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2026_teste",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "01",
+      "aliquota_total": 0.01
+    }
+  },
+  {
+    "id": "GS-007",
+    "descricao": "Lucro Real - rodoviário - 2027 convivência",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "PR",
+      "destino_uf": "SP",
+      "regime_tributario": "lucro_real",
+      "data_emissao": "2027-08-15",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2027_2032_convivencia",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "01",
+      "aliquota_total": 0.01
+    }
+  },
+  {
+    "id": "GS-008",
+    "descricao": "TAC - Simples Nacional - 2026 - não contribuinte",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "CE",
+      "destino_uf": "PE",
+      "regime_tributario": "simples_nacional",
+      "data_emissao": "2026-04-20",
+      "contratado_pessoa_fisica": true
+    },
+    "esperado": {
+      "fase_transicao": "regime_especial",
+      "obrigatoriedade_destaque": false,
+      "cclasstrib": "05",
+      "aliquota_total": 0.0
+    }
+  },
+  {
+    "id": "GS-009",
+    "descricao": "Transporte internacional - 2027 - imunidade mantida",
+    "operacao": {
+      "modal": "internacional",
+      "origem_uf": "RJ",
+      "destino_uf": "EX",
+      "regime_tributario": "lucro_presumido",
+      "data_emissao": "2027-01-10",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "regime_especial",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "04",
+      "aliquota_total": 0.0
+    }
+  },
+  {
+    "id": "GS-010",
+    "descricao": "Lucro Presumido - rodoviário - 2027 convivência",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "AM",
+      "destino_uf": "PA",
+      "regime_tributario": "lucro_presumido",
+      "data_emissao": "2028-06-01",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2027_2032_convivencia",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": null,
+      "aliquota_total": null,
+      "determinado": false
+    }
+  },
+  {
+    "id": "GS-011",
+    "descricao": "Simples Nacional - 2030 - obrigatório (convivência)",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "MT",
+      "destino_uf": "MS",
+      "regime_tributario": "simples_nacional",
+      "data_emissao": "2030-09-15",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2027_2032_convivencia",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": "03",
+      "aliquota_total": 0.01
+    }
+  },
+  {
+    "id": "GS-012",
+    "descricao": "Lucro Real - 2033 definitivo",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "SP",
+      "destino_uf": "MG",
+      "regime_tributario": "lucro_real",
+      "data_emissao": "2033-03-01",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2033_definitivo",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": null,
+      "aliquota_total": null,
+      "determinado": false
+    }
+  },
+  {
+    "id": "GS-013",
+    "descricao": "TAC - Lucro Presumido - 2027 - não contribuinte",
+    "operacao": {
+      "modal": "rodoviario",
+      "origem_uf": "ES",
+      "destino_uf": "RJ",
+      "regime_tributario": "lucro_presumido",
+      "data_emissao": "2027-05-15",
+      "contratado_pessoa_fisica": true
+    },
+    "esperado": {
+      "fase_transicao": "regime_especial",
+      "obrigatoriedade_destaque": false,
+      "cclasstrib": "05",
+      "aliquota_total": 0.0
+    }
+  },
+  {
+    "id": "GS-014",
+    "descricao": "Lucro Real - aéreo - 2026 fase-teste",
+    "operacao": {
+      "modal": "aereo",
+      "origem_uf": "SP",
+      "destino_uf": "AM",
+      "regime_tributario": "lucro_real",
+      "data_emissao": "2026-12-01",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2026_teste",
+      "obrigatoriedade_destaque": true,
+      "cclasstrib": null,
+      "aliquota_total": null,
+      "determinado": false
+    }
+  },
+  {
+    "id": "GS-015",
+    "descricao": "Simples Nacional - 2026 - aquaviário - facultativo",
+    "operacao": {
+      "modal": "aquaviario",
+      "origem_uf": "PA",
+      "destino_uf": "AM",
+      "regime_tributario": "simples_nacional",
+      "data_emissao": "2026-08-10",
+      "contratado_pessoa_fisica": false
+    },
+    "esperado": {
+      "fase_transicao": "2026_teste",
+      "obrigatoriedade_destaque": false,
+      "cclasstrib": "02",
+      "aliquota_total": 0.0
+    }
+  }
+]
