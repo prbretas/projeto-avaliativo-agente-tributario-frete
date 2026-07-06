@@ -25,7 +25,8 @@ def test_transporte_internacional_imunidade():
 
 
 def test_tac_nao_contribuinte():
-    resultado = consultar_cclasstrib("2026_teste", "lucro_real", True, "rodoviario")
+    # TAC usa fase "regime_especial" conforme classify_scenario
+    resultado = consultar_cclasstrib("regime_especial", "lucro_real", True, "rodoviario")
     assert resultado.determinado is True
     assert resultado.cclasstrib == "05"
 

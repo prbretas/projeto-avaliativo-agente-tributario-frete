@@ -60,18 +60,69 @@ TABELA_CCLASSTRIB: dict[tuple[str, str, bool, str], ResultadoCClassTrib] = {
         determinado=True,
         observacao="Transporte internacional: imunidade/aliquota zero. Art. 8 LC 214/2025."
     ),
-    # TAC - transportador autônomo pessoa física
-    ("2026_teste", "lucro_real", True, "rodoviario"): ResultadoCClassTrib(
+    # TAC - transportador autônomo pessoa física (regime_especial — independe de fase/regime)
+    ("regime_especial", "lucro_real", True, "rodoviario"): ResultadoCClassTrib(
         cclasstrib="05",
         aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
         determinado=True,
-        observacao="TAC (pessoa fisica): nao e contribuinte. Obrigacao de retencao/recolhimento recai sobre o contratante."
+        observacao="TAC (pessoa fisica): nao e contribuinte. Obrigacao recai sobre o contratante."
     ),
-    ("2027_2032_convivencia", "lucro_real", True, "rodoviario"): ResultadoCClassTrib(
+    ("regime_especial", "lucro_presumido", True, "rodoviario"): ResultadoCClassTrib(
         cclasstrib="05",
         aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
         determinado=True,
-        observacao="TAC (pessoa fisica): nao e contribuinte. Obrigacao de retencao/recolhimento recai sobre o contratante."
+        observacao="TAC (pessoa fisica): nao e contribuinte. Obrigacao recai sobre o contratante."
+    ),
+    ("regime_especial", "simples_nacional", True, "rodoviario"): ResultadoCClassTrib(
+        cclasstrib="05",
+        aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
+        determinado=True,
+        observacao="TAC (pessoa fisica): nao e contribuinte. Obrigacao recai sobre o contratante."
+    ),
+    # Transporte internacional (regime_especial — independe de fase)
+    ("regime_especial", "lucro_real", False, "internacional"): ResultadoCClassTrib(
+        cclasstrib="04",
+        aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
+        determinado=True,
+        observacao="Transporte internacional: imunidade/aliquota zero. Art. 8 LC 214/2025."
+    ),
+    ("regime_especial", "lucro_presumido", False, "internacional"): ResultadoCClassTrib(
+        cclasstrib="04",
+        aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
+        determinado=True,
+        observacao="Transporte internacional: imunidade/aliquota zero. Art. 8 LC 214/2025."
+    ),
+    ("regime_especial", "simples_nacional", False, "internacional"): ResultadoCClassTrib(
+        cclasstrib="04",
+        aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
+        determinado=True,
+        observacao="Transporte internacional: imunidade/aliquota zero. Art. 8 LC 214/2025."
+    ),
+    # Simples Nacional 2027-2032 convivência (outros modais)
+    ("2027_2032_convivencia", "simples_nacional", False, "aereo"): ResultadoCClassTrib(
+        cclasstrib="03",
+        aliquota_cbs=0.009, aliquota_ibs=0.001, aliquota_total=0.01,
+        determinado=True,
+        observacao="Simples Nacional 2027+: destaque obrigatorio."
+    ),
+    ("2027_2032_convivencia", "simples_nacional", False, "aquaviario"): ResultadoCClassTrib(
+        cclasstrib="03",
+        aliquota_cbs=0.009, aliquota_ibs=0.001, aliquota_total=0.01,
+        determinado=True,
+        observacao="Simples Nacional 2027+: destaque obrigatorio."
+    ),
+    # Simples Nacional 2026 - outros modais
+    ("2026_teste", "simples_nacional", False, "aereo"): ResultadoCClassTrib(
+        cclasstrib="02",
+        aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
+        determinado=True,
+        observacao="Simples Nacional 2026: destaque facultativo."
+    ),
+    ("2026_teste", "simples_nacional", False, "aquaviario"): ResultadoCClassTrib(
+        cclasstrib="02",
+        aliquota_cbs=0.0, aliquota_ibs=0.0, aliquota_total=0.0,
+        determinado=True,
+        observacao="Simples Nacional 2026: destaque facultativo."
     ),
 }
 

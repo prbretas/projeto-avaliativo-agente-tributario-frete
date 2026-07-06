@@ -58,8 +58,9 @@ def test_simples_nacional_2026():
 
 
 def test_tac_nao_contribuinte():
-    """TAC (pessoa física) retorna cClassTrib '05' e aliquota 0.0."""
-    result = determine_cclasstrib(_state("2026_teste", "lucro_real", tac=True))
+    """TAC (pessoa física) retorna cClassTrib '05' e aliquota 0.0.
+    TAC é classificado como 'regime_especial' pelo classify_scenario."""
+    result = determine_cclasstrib(_state("regime_especial", "lucro_real", tac=True))
     r = result["resultado_cclasstrib"]
     assert r.determinado is True
     assert r.cclasstrib == "05"
