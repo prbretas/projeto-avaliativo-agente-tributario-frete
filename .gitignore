@@ -49,3 +49,9 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Arquivos locais (nao versionar)
+COMANDOS.md
+**/COMANDOS.md
+scripts/teste_sistema.py
+**/teste_sistema.py

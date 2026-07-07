@@ -77,18 +77,19 @@ def test_retry_em_falha_de_formato():
 
 
 def test_falha_total_retorna_erro():
-    """R5.3 — ambas as tentativas falham → campo erro preenchido."""
+    """R5.3 — ambas as tentativas falham → campo erro preenchido, justificativa fallback."""
     with patch("src.graph.generate_justification.ChatOllama") as MockLLM:
         MockLLM.return_value.invoke.return_value = _mock_llm_response("sem JSON aqui")
         result = generate_justification(_state_completo())
 
     assert result["erro"] is not None
-    assert "falhou após" in result["erro"]
-    assert result["justificativa"] is None
+    assert "falhou apos" in result["erro"]
+    # Justificativa agora tem valor fallback (nao bloqueia o fluxo)
+    assert result["justificativa"] is not None
 
 
-def test_sem_fontes_retorna_erro():
-    """R5.2 — fontes_citadas vazio → erro mesmo com justificativa presente."""
+def test_sem_fontes_usa_fallback_do_contexto():
+    """R5.2 — fontes vazias → usa documentos do contexto RAG como fallback."""
     payload = json.dumps({
         "justificativa": "Justificativa sem fontes.",
         "fontes_citadas": [],
@@ -97,8 +98,9 @@ def test_sem_fontes_retorna_erro():
         MockLLM.return_value.invoke.return_value = _mock_llm_response(payload)
         result = generate_justification(_state_completo())
 
-    # Sem fontes → entra no retry → ambas as tentativas sem fontes → erro
-    assert result["erro"] is not None
+    # Com contexto RAG disponivel, usa documento como fallback
+    assert result["erro"] is None
+    assert len(result["fontes_citadas"]) >= 1
 
 
 def test_sem_classificacao_retorna_erro():
