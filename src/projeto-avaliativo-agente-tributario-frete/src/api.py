@@ -11,7 +11,7 @@ import uuid
 from fastapi import FastAPI, HTTPException
 from langgraph.checkpoint.sqlite import SqliteSaver
 from src.schemas.models import OperacaoRequest, ClassificacaoResponse, ReviewRequest
-from src.graph.grafo import criar_grafo  # montado na ISSUE-012
+from src.graph.grafo import criar_grafo
 
 DB_PATH = "data/checkpoints.sqlite"
 app = FastAPI(
@@ -23,6 +23,33 @@ app = FastAPI(
 
 def _get_checkpointer():
     return SqliteSaver.from_conn_string(DB_PATH)
+
+
+def _extrair_resposta(thread_id: str, vals: dict, status: str) -> ClassificacaoResponse:
+    """
+    Extrai campos do AgentState para o schema de resposta.
+    Funciona com objetos Pydantic (produção) e dicts (testes/mocks).
+    """
+    resultado = vals.get("resultado_cclasstrib")
+    classificacao = vals.get("classificacao")
+
+    def _campo(obj, attr):
+        """Acessa atributo em objeto Pydantic ou chave em dict."""
+        if obj is None:
+            return None
+        if isinstance(obj, dict):
+            return obj.get(attr)
+        return getattr(obj, attr, None)
+
+    return ClassificacaoResponse(
+        thread_id=thread_id,
+        status=status,
+        cclasstrib=_campo(resultado, "cclasstrib"),
+        aliquota_total=_campo(resultado, "aliquota_total"),
+        fase_transicao=_campo(classificacao, "fase_transicao"),
+        justificativa=vals.get("justificativa"),
+        fontes_citadas=vals.get("fontes_citadas") or [],
+    )
 
 
 @app.post("/classificar", response_model=ClassificacaoResponse, status_code=202)
@@ -51,19 +78,10 @@ def classificar(request: OperacaoRequest):
         for _ in grafo.stream(state_inicial, config=config):
             pass
 
-        # Lê o estado após a pausa
         snapshot = grafo.get_state(config)
         vals = snapshot.values
 
-    return ClassificacaoResponse(
-        thread_id=thread_id,
-        status="pendente_revisao",
-        cclasstrib=vals.get("resultado_cclasstrib", {}).get("cclasstrib") if vals.get("resultado_cclasstrib") else None,
-        aliquota_total=vals.get("resultado_cclasstrib", {}).get("aliquota_total") if vals.get("resultado_cclasstrib") else None,
-        fase_transicao=vals.get("classificacao", {}).get("fase_transicao") if vals.get("classificacao") else None,
-        justificativa=vals.get("justificativa"),
-        fontes_citadas=vals.get("fontes_citadas", []),
-    )
+    return _extrair_resposta(thread_id, vals, "pendente_revisao")
 
 
 @app.get("/classificar/{thread_id}", response_model=ClassificacaoResponse)
@@ -74,22 +92,14 @@ def consultar(thread_id: str):
         grafo = criar_grafo(checkpointer)
         snapshot = grafo.get_state(config)
 
-    if not snapshot:
+    if not snapshot or not snapshot.values:
         raise HTTPException(status_code=404, detail=f"thread_id '{thread_id}' nao encontrado")
 
     vals = snapshot.values
     aprovado = vals.get("aprovado_por_humano")
     status = "aprovado" if aprovado is True else ("rejeitado" if aprovado is False else "pendente_revisao")
 
-    return ClassificacaoResponse(
-        thread_id=thread_id,
-        status=status,
-        cclasstrib=vals.get("resultado_cclasstrib", {}).get("cclasstrib") if vals.get("resultado_cclasstrib") else None,
-        aliquota_total=vals.get("resultado_cclasstrib", {}).get("aliquota_total") if vals.get("resultado_cclasstrib") else None,
-        fase_transicao=vals.get("classificacao", {}).get("fase_transicao") if vals.get("classificacao") else None,
-        justificativa=vals.get("justificativa"),
-        fontes_citadas=vals.get("fontes_citadas", []),
-    )
+    return _extrair_resposta(thread_id, vals, status)
 
 
 @app.post("/classificar/{thread_id}/review", response_model=ClassificacaoResponse)
@@ -99,15 +109,15 @@ def review(thread_id: str, request: ReviewRequest):
     aprovado=True → avanca para export_result
     aprovado=False → retorna para classify_scenario
     """
-    config = {"configurable": {"thread_id": thread_id}}
     from langgraph.types import Command
+
+    config = {"configurable": {"thread_id": thread_id}}
+    resposta = {"aprovado": request.aprovado}
+    if request.comentario:
+        resposta["comentario"] = request.comentario
 
     with _get_checkpointer() as checkpointer:
         grafo = criar_grafo(checkpointer)
-        resposta = {"aprovado": request.aprovado}
-        if request.comentario:
-            resposta["comentario"] = request.comentario
-
         for _ in grafo.stream(Command(resume=resposta), config=config):
             pass
 
@@ -115,12 +125,4 @@ def review(thread_id: str, request: ReviewRequest):
         vals = snapshot.values
 
     status = "aprovado" if request.aprovado else "rejeitado"
-    return ClassificacaoResponse(
-        thread_id=thread_id,
-        status=status,
-        cclasstrib=vals.get("resultado_cclasstrib", {}).get("cclasstrib") if vals.get("resultado_cclasstrib") else None,
-        aliquota_total=vals.get("resultado_cclasstrib", {}).get("aliquota_total") if vals.get("resultado_cclasstrib") else None,
-        fase_transicao=vals.get("classificacao", {}).get("fase_transicao") if vals.get("classificacao") else None,
-        justificativa=vals.get("justificativa"),
-        fontes_citadas=vals.get("fontes_citadas", []),
-    )
+    return _extrair_resposta(thread_id, vals, status)
