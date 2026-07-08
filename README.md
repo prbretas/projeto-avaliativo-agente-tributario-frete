@@ -1,150 +1,263 @@
-# SCTEC — Agente Tributário de Frete
+# Agente de Classificação Tributária de Frete
 
-> Projeto avaliativo M2.1 — Curso SCTEC / SENAI  
-> Agente de Classificação Tributária de Frete com RAG + LangGraph
-
----
-
-## Sobre o projeto
-
-Agente de IA local que analisa dados de uma operação de transporte de cargas e sugere a
-classificação tributária aplicável (IBS/CBS, cClassTrib, alíquota estimada) conforme a Reforma
-Tributária brasileira (EC 132/2023 e LC 214/2025).
-
-**Problema que resolve:** desde 03/08/2026, documentos fiscais de frete (CT-e) sem o correto
-preenchimento dos campos IBS/CBS são rejeitados automaticamente pela SEFAZ. Este agente apoia a
-decisão de classificação com embasamento regulatório real.
-
-**Avaliação:** M2.1 (30% do módulo) · **Entrega:** 20/07/2026 15h · **Modalidade:** Individual
+> Projeto Avaliativo M2.1 — Curso SCTEC / SENAI · Módulo: IA para DEVs  
+> Agente de IA local que classifica tributariamente operações de frete conforme a Reforma Tributária brasileira (IBS/CBS — LC 214/2025).
 
 ---
 
-## Stack
+## Problema
+
+Desde 03/08/2026, documentos fiscais de frete (CT-e) precisam ter os campos de IBS e CBS corretamente preenchidos para não serem rejeitados pela SEFAZ. O campo `cClassTrib` é obrigatório para empresas do regime regular, e opcional (com regras específicas) para o Simples Nacional. Classificar errado gera rejeição automática e retrabalho operacional.
+
+Este agente resolve esse problema: dado os dados de uma operação de frete, classifica o cenário tributário aplicável, sugere o `cClassTrib` e a alíquota correta, justifica com base na legislação real (LC 214/2025), e aguarda aprovação humana antes de exportar o resultado.
+
+---
+
+## Objetivo do agente
+
+Automatizar a classificação tributária de uma operação de frete, entregando:
+- o código `cClassTrib` correto
+- a alíquota estimada (IBS + CBS)
+- uma justificativa em linguagem natural citando a base legal
+- validação humana antes de aceitar o resultado (human-in-the-loop)
+- exportação em JSON via API REST
+
+---
+
+## Fluxo com LangGraph
+
+```
+Entrada (dados da operação)
+         ↓
+  parse_operacao          → valida e normaliza os campos (modal, regime, data, UFs)
+         ↓
+  retrieve_context        → busca trechos da LC 214/2025 no índice vetorial (RAG/Chroma)
+         ↓
+  classify_scenario       → aplica as 5 regras do R3 e determina a fase de transição
+         ↓
+  determine_cclasstrib    → consulta tabela determinística → retorna cClassTrib e alíquota
+         ↓
+  generate_justification  → LLM local (llama3.2) gera justificativa citando fontes do RAG
+         ↓
+  [human_review]          → PAUSA — aguarda aprovação via API (interrupt() do LangGraph)
+         ↓ aprovado
+  export_result           → salva JSON em data/outputs/ e retorna via API REST
+```
+
+O grafo é implementado com `StateGraph` do LangGraph. O nó `human_review` usa `interrupt()` para pausar a execução completamente — ela só retoma quando o usuário chama `POST /classificar/{thread_id}/review`.
+
+---
+
+## Ferramenta integrada ao agente
+
+O agente integra **duas ferramentas** ao fluxo:
+
+1. **RAG (Retrieval-Augmented Generation) com Chroma**  
+   O nó `retrieve_context` consulta um índice vetorial local (`data/chroma_db/`) construído a partir de documentos reais da LC 214/2025 e das Notas Técnicas do CT-e. Os trechos recuperados são usados para embasar a justificativa gerada pelo LLM — o agente nunca "inventa" a legislação.
+
+2. **Tabela determinística `TABELA_CCLASSTRIB`** (`src/tools/tabela_cclasstrib.py`)  
+   O nó `determine_cclasstrib` consulta um lookup em código Python puro — o `cClassTrib` e a alíquota **nunca são gerados pelo LLM**. São sempre resultado de uma tabela mapeada a partir da legislação. Se a combinação não existe na tabela, o agente sinaliza "revisão manual necessária".
+
+---
+
+## Stack tecnológica
 
 | Componente | Tecnologia |
 |---|---|
-| Linguagem | Python 3.11+ |
-| Orquestração do agente | LangGraph (StateGraph + `interrupt()`) |
-| LLM local | Ollama — `llama3.1:8b` ou `mistral` |
-| Embeddings | `nomic-embed-text` via Ollama |
+| Linguagem | Python 3.12 |
+| Orquestração do agente | LangGraph (StateGraph, `interrupt()`, SqliteSaver) |
+| LLM local | Ollama — `llama3.2:latest` |
+| Embeddings (RAG) | `nomic-embed-text` via Ollama |
 | Vector store | Chroma (local, persistente) |
-| Persistência de estado | SQLite (`SqliteSaver`) |
-| Validação de schema | Pydantic |
-| Testes | pytest + golden set |
-| API | FastAPI (endpoint REST para integração externa) |
+| Persistência de estado | SQLite (`langgraph-checkpoint-sqlite`) |
+| Validação de schemas | Pydantic v2 |
+| API REST | FastAPI + Uvicorn |
+| Testes | pytest (55 testes) + golden set (15 cenários) |
 
-> Sem APIs pagas. Funciona 100% offline.
+> Funciona 100% offline — sem APIs pagas, sem chamadas externas.
 
 ---
 
-## Como rodar localmente
+## Como executar o projeto
 
 ### Pré-requisitos
 
-- Python 3.11+
-- [Ollama](https://ollama.ai) instalado e rodando
+- Python 3.11 ou superior
+- [Ollama](https://ollama.com) instalado
 - Git
 
-### Setup
+### 1. Clonar o repositório
 
 ```bash
-# 1. Clone o repositório
-git clone <url-do-repo>
-cd SCTEC-agente-tributario-frete/src/projeto-avaliativo-agente-tributario-frete
+git clone https://github.com/prbretas/projeto-avaliativo-agente-tributario-frete.git
+cd projeto-avaliativo-agente-tributario-frete/src/projeto-avaliativo-agente-tributario-frete
+```
 
-# 2. Crie e ative o venv
+### 2. Criar e ativar ambiente virtual
+
+```bash
 python -m venv .venv
-.venv\Scripts\activate   # Windows
-# source .venv/bin/activate  # Linux/Mac
 
-# 3. Instale as dependências
+# Windows:
+.venv\Scripts\activate
+
+# Linux/Mac:
+source .venv/bin/activate
+```
+
+### 3. Instalar dependências
+
+```bash
 pip install -r requirements.txt
+```
 
-# 4. Baixe os modelos no Ollama
-ollama pull llama3.1:8b
+### 4. Baixar os modelos no Ollama
+
+```bash
+# Terminal separado — mantém o Ollama rodando
+ollama serve
+
+# Em outro terminal:
+ollama pull llama3.2
 ollama pull nomic-embed-text
-
-# 5. Configure o git hook de testes
-git config core.hooksPath .githooks
-
-# 6. Execute o agente
-python src/main.py
 ```
 
-### Rodar os testes
+### 5. Indexar os documentos regulatórios (RAG)
 
 ```bash
-pytest tests/
+python scripts/run_ingestao.py
 ```
 
-### Executar o golden set de avaliação
+> Isso processa os arquivos em `data/docs_regulatorios/` e cria o índice vetorial em `data/chroma_db/`. Necessário apenas uma vez por máquina.
+
+### 6. Subir a API
 
 ```bash
+python -m uvicorn src.api:app --host 127.0.0.1 --port 8080
+```
+
+Acesse a documentação interativa em: **http://127.0.0.1:8080/docs**
+
+---
+
+## Exemplo de entrada
+
+```json
+{
+  "modal": "rodoviario",
+  "origem_uf": "SP",
+  "destino_uf": "RJ",
+  "regime_tributario": "lucro_real",
+  "data_emissao": "2026-09-15",
+  "contratado_pessoa_fisica": false
+}
+```
+
+**Endpoint:** `POST http://127.0.0.1:8080/classificar`
+
+---
+
+## Exemplo de saída
+
+```json
+{
+  "thread_id": "4ce43e4c-5875-40aa-bd2b-9a67ac3664ae",
+  "status": "pendente_revisao",
+  "cclasstrib": "01",
+  "aliquota_total": 0.01,
+  "fase_transicao": "2026_teste",
+  "justificativa": "A operação de frete rodoviário entre SP e RJ, realizada por empresa do Lucro Real em setembro de 2026, enquadra-se na fase-teste da Reforma Tributária. Conforme Art. 337 da LC 214/2025, a alíquota somada de IBS e CBS é de 1% (0,9% CBS + 0,1% IBS) durante todo o ano de 2026.",
+  "fontes_citadas": ["lc_214_2025_frete - Art. 337"]
+}
+```
+
+Após receber o `thread_id`, o usuário pode **aprovar** ou **rejeitar** via:
+
+```
+POST http://127.0.0.1:8080/classificar/{thread_id}/review
+Body: {"aprovado": true, "comentario": "Classificação correta"}
+```
+
+Se aprovado, o resultado é exportado em `data/outputs/resultado_YYYYMMDD_HHMMSS.json`.
+
+---
+
+## Principais decisões tomadas
+
+1. **cClassTrib via tabela determinística, não LLM** — O LLM é usado apenas para gerar a justificativa em linguagem natural. O código tributário vem de um lookup em Python para garantir determinismo e rastreabilidade.
+
+2. **RAG com documentos reais** — Em vez de depender do conhecimento do LLM sobre a legislação, os trechos relevantes da LC 214/2025 são recuperados do índice vetorial e injetados no prompt. Isso garante que a justificativa cita fontes reais.
+
+3. **Human-in-the-loop via `interrupt()`** — O grafo para completamente no nó `human_review` e só retoma quando o usuário envia a aprovação pela API. Isso é implementado com o mecanismo nativo do LangGraph, com estado persistido no SQLite.
+
+4. **API REST genérica** — O resultado é disponibilizado via FastAPI para integração com qualquer sistema externo, sem dependência de plataformas ou ERPs específicos.
+
+5. **Ollama 100% local** — Nenhuma chamada a APIs pagas (OpenAI, Anthropic, etc.). O projeto funciona offline com `llama3.2` e `nomic-embed-text`.
+
+---
+
+## Limitações da solução
+
+- **Tabela de cClassTrib incompleta** — A tabela cobre os cenários mais comuns (2026-teste, Simples Nacional, TAC, internacional), mas combinações menos frequentes retornam "revisão manual necessária". Cobertura total depende de validação com contador especializado.
+
+- **LLM local menor** — O `llama3.2` (~2 GB) é adequado para a demonstração, mas pode gerar justificativas menos precisas que modelos maiores. Cada requisição ao LLM demora 3-5 minutos na primeira execução.
+
+- **Não emite CT-e real** — O agente sugere a classificação, mas não integra com SEFAZ nem emite documentos fiscais reais.
+
+- **Interface apenas via API/CLI** — Não há interface gráfica. A interação é via endpoints REST ou linha de comando.
+
+- **Base RAG limitada** — A base regulatória cobre trechos selecionados da LC 214/2025 e Notas Técnicas. Alterações futuras na legislação precisarão de reingestão manual.
+
+---
+
+## Rodando os testes
+
+```bash
+# Suite completa (55 testes)
+python -m pytest tests/ -v
+
+# Golden set (15 cenários tributários, meta >= 80%)
 python scripts/run_golden_set.py
 ```
 
 ---
 
-## Estrutura do projeto
+## Estrutura do repositório
 
 ```
 src/
-  /graph          # StateGraph, nós e edges do LangGraph
-  /rag            # ingestão, chunking, indexação e retrieval
-  /tools          # lookup determinístico de cClassTrib/alíquota
-  /schemas        # modelos Pydantic (State, outputs estruturados)
+  graph/          # nós do LangGraph (parse, retrieve, classify, determine, generate, review, export)
+  rag/            # pipeline de ingestão e retrieval (Chroma)
+  tools/          # TABELA_CCLASSTRIB determinística
+  schemas/        # modelos Pydantic (AgentState, Operacao, ...)
+  api.py          # API FastAPI com 3 endpoints REST
+  main.py         # ponto de entrada CLI
+
 data/
-  /docs_regulatorios   # LC 214/2025, Notas Técnicas (fonte do RAG)
-  /golden_set          # cenários de teste com resultado esperado
-  /chroma_db           # índice vetorial local (gerado na ingestão)
-tests/                 # suíte pytest
-docs/
-  /prompts             # log de prompts por issue (rastreabilidade IA)
-  kanban.md            # quadro Kanban do projeto
-.kiro/
-  /specs               # requirements, design e tasks (spec Kiro)
-  /steering            # contexto permanente para o agente IA
-  /hooks               # automações do Kiro
-.githooks/
-  pre-commit           # bloqueia commit se pytest falhar
+  docs_regulatorios/   # LC 214/2025 e Notas Técnicas CT-e (fonte do RAG)
+  golden_set/          # 15 cenários de teste com resultado esperado
+  chroma_db/           # índice vetorial (gerado localmente, não versionado)
+  outputs/             # JSONs exportados após aprovação humana
+
+tests/            # 55 testes automatizados (pytest)
+scripts/          # run_ingestao.py, run_golden_set.py
+docs/prompts/     # histórico de prompts por issue (ISSUE-000 a ISSUE-014)
+
+.kiro/specs/      # requirements.md, design.md, tasks.md
+.kiro/steering/   # contexto do agente de desenvolvimento (Kiro)
 ```
-
----
-
-## Fluxo do agente
-
-```
-parse_operacao → retrieve_context → classify_scenario
-    → determine_cclasstrib → generate_justification
-    → [human_review] → export_result → API REST
-```
-
-O nó `human_review` pausa a execução via `interrupt()` do LangGraph e aguarda aprovação ou
-rejeição. Se rejeitado, o fluxo retorna para `classify_scenario`. O resultado aprovado é
-disponibilizado via endpoint REST para integração com qualquer sistema externo.
-
----
-
-## Workflow de desenvolvimento
-
-Ver `.kiro/steering/workflow.md` para as regras completas. Resumo:
-
-- Uma branch por issue: `feature/ISSUE-XXX-slug`
-- Salvar prompt em `docs/prompts/` antes do primeiro commit
-- PR só mergeia com todos os testes passando
-- Kanban em `docs/kanban.md`
 
 ---
 
 ## Fontes regulatórias
 
-- LC 214/2025 (IBS/CBS)
-- Nota Técnica CT-e NT 2025.001
-- EC 132/2023 (Reforma Tributária)
+- LC 214/2025 — Lei Complementar que instituiu o IBS e a CBS
+- EC 132/2023 — Emenda Constitucional da Reforma Tributária
+- NT 2025.001 do CT-e — Nota Técnica com os novos campos do documento fiscal
 - Cronograma de transição 2026–2033 (SEFAZ)
 
 ---
 
 ## Autor
 
-Philippe Bretas — Curso SCTEC / SENAI · Módulo M2.1
+Philippe Bretas — Curso SCTEC / SENAI · Avaliação M2.1 · 2026
