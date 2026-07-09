@@ -52,10 +52,4 @@ logs/
 
 # Arquivos locais (nao versionar)
 COMANDOS.md
-**/COMANDOS.md
-scripts/teste_sistema.py
-**/teste_sistema.py
 GUIA-TESTE-LOCAL.md
-**/GUIA-TESTE-LOCAL.md
-comandoscmd.md
-**/comandoscmd.md
