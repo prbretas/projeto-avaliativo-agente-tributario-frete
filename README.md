@@ -1,4 +1,4 @@
-# Agente de Classificação Tributária de Frete
+# AgenteClassTrib
 
 > Projeto Avaliativo M2.1 — Curso SCTEC / SENAI · Módulo: IA para DEVs  
 > Agente de IA local que classifica tributariamente operações de frete conforme a Reforma Tributária brasileira (IBS/CBS — LC 214/2025).
@@ -89,8 +89,8 @@ O agente integra **duas ferramentas** ao fluxo:
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/prbretas/projeto-avaliativo-agente-tributario-frete.git
-cd projeto-avaliativo-agente-tributario-frete/src/projeto-avaliativo-agente-tributario-frete
+git clone https://github.com/prbretas/agenteclasstrib.git
+cd agenteclasstrib/src/agenteclasstrib
 ```
 
 ### 2. Criar e ativar ambiente virtual
@@ -196,17 +196,31 @@ Se aprovado, o resultado é exportado em `data/outputs/resultado_YYYYMMDD_HHMMSS
 
 ---
 
-## Limitações da solução
+## Limitações da solução (V1.0)
 
 - **Tabela de cClassTrib incompleta** — A tabela cobre os cenários mais comuns (2026-teste, Simples Nacional, TAC, internacional), mas combinações menos frequentes retornam "revisão manual necessária". Cobertura total depende de validação com contador especializado.
 
 - **LLM local menor** — O `llama3.2` (~2 GB) é adequado para a demonstração, mas pode gerar justificativas menos precisas que modelos maiores. Cada requisição ao LLM demora 3-5 minutos na primeira execução.
 
-- **Não emite CT-e real** — O agente sugere a classificação, mas não integra com SEFAZ nem emite documentos fiscais reais.
+- **Não emite CT-e real** — O agente sugere a classificação, mas não integra com SEFAZ nem emite documentos fiscais reais. *(Planejado para V2.0)*
 
-- **Interface apenas via API/CLI** — Não há interface gráfica. A interação é via endpoints REST ou linha de comando.
+- **Interface apenas via API/CLI** — Não há interface gráfica. A interação é via endpoints REST ou linha de comando. *(Planejado para V2.0)*
 
-- **Base RAG limitada** — A base regulatória cobre trechos selecionados da LC 214/2025 e Notas Técnicas. Alterações futuras na legislação precisarão de reingestão manual.
+- **Base RAG limitada** — A base regulatória cobre trechos selecionados da LC 214/2025 e Notas Técnicas. Alterações futuras na legislação precisarão de reingestão manual. *(Planejado para V2.0)*
+
+---
+
+## Versão 2.0 — Roadmap
+
+As evoluções abaixo estão planejadas para após a avaliação do projeto. Detalhes completos em [`ROADMAP.md`](./ROADMAP.md).
+
+| Feature | Descrição |
+|---|---|
+| 🧾 **Emissão CT-e (homologação)** | Integração com API de terceiros (NFe.io / Focus NFe) para enviar o resultado aprovado diretamente à SEFAZ em ambiente de homologação |
+| 🖥️ **Interface gráfica web** | Frontend em React + Vite com formulário de entrada, painel de aprovação/rejeição e histórico de classificações |
+| 🔄 **RAG incremental e atualizado** | Ingestão incremental por hash + scraping agendado de fontes oficiais (ENCAT, DOU, SEFAZ) para manter a base regulatória sempre atualizada |
+
+> Todas as features V2.0 serão desenvolvidas na branch `v2`, mantendo a `main` estável com a versão avaliada.
 
 ---
 
