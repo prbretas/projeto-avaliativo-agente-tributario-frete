@@ -45,7 +45,7 @@ escopo, arquitetura e specs do Kiro para a avaliação M2.1.
 > Sim, essa é a direção
 
 **Resultado gerado (resumo):**
-- Confirmação do escopo: Agente de Classificação Tributária de Frete com RAG (LC 214/2025 +
+- Confirmação do escopo: AgenteClassTrib com RAG (LC 214/2025 +
   Notas Técnicas), LangGraph, Ollama local.
 
 ---

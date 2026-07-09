@@ -1,4 +1,4 @@
-# Design: Agente de Classificação Tributária de Frete (RAG + LangGraph)
+# Design: AgenteClassTrib (RAG + LangGraph)
 
 Referência: `.kiro/specs/agente-classificacao-tributaria-frete/requirements.md`
 

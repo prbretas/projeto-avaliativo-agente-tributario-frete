@@ -1,4 +1,4 @@
-# Agente de Classificação Tributária de Frete
+# AgenteClassTrib
 
 > Agente de IA local para classificação tributária de operações de frete conforme a Reforma
 > Tributária brasileira (IBS/CBS — LC 214/2025).

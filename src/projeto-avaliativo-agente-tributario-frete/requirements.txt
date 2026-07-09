@@ -1,4 +1,4 @@
-# Dependências do Agente de Classificação Tributária de Frete
+# Dependências do AgenteClassTrib
 # Versões pinadas — atualize com cuidado e rode os testes após qualquer mudança.
 
 # Orquestração do agente

@@ -26,7 +26,7 @@ def get(path):
         return json.loads(resp.read())
 
 
-print("=== Teste do Agente Tributário de Frete via API ===\n")
+print("=== Teste do AgenteClassTrib via API ===\n")
 
 # 1. Dispara o agente
 print("1. POST /classificar — Operação rodoviária Lucro Real 2026...")

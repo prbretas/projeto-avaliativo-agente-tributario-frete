@@ -1,5 +1,5 @@
 """
-API REST do Agente de Classificação Tributária de Frete.
+API REST do AgenteClassTrib.
 Requisito R7.2 — endpoint REST para integração externa.
 
 Endpoints:
@@ -15,7 +15,7 @@ from src.graph.grafo import criar_grafo
 
 DB_PATH = "data/checkpoints.sqlite"
 app = FastAPI(
-    title="Agente Tributário de Frete",
+    title="AgenteClassTrib",
     description="Classifica tributariamente operações de frete (IBS/CBS) conforme LC 214/2025",
     version="1.0.0",
 )

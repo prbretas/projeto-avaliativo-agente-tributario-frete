@@ -1,5 +1,5 @@
 $gh   = "C:\Program Files\GitHub CLI\gh.exe"
-$repo = "prbretas/projeto-avaliativo-agente-tributario-frete"
+$repo = "prbretas/agenteclasstrib"
 
 $issues = @(
   @{

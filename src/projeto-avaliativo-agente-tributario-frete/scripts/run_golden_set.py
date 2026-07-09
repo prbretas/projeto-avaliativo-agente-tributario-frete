@@ -1,5 +1,5 @@
 """
-Script de avaliação do golden set — Agente de Classificação Tributária de Frete.
+Script de avaliação do golden set — AgenteClassTrib.
 Executa: python scripts/run_golden_set.py
 
 Meta: taxa de acerto >= 80% em fase_transicao e cclasstrib (R8.2).

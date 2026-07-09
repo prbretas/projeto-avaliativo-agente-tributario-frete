@@ -1,4 +1,4 @@
-# Tasks: Agente de Classificação Tributária de Frete (RAG + LangGraph)
+# Tasks: AgenteClassTrib (RAG + LangGraph)
 
 Cada task abaixo é uma **Issue**. Convenções obrigatórias (ver `.kiro/steering/workflow.md`):
 

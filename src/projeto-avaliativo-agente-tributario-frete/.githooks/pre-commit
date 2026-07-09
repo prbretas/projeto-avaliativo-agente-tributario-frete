@@ -1,6 +1,6 @@
 #!/bin/sh
 echo "[pre-commit] Rodando pytest..."
-cd src/projeto-avaliativo-agente-tributario-frete
+cd src/agenteclasstrib
 .venv/Scripts/python.exe -m pytest tests/ -q --tb=short 2>&1
 STATUS=$?
 if [ $STATUS -ne 0 ]; then

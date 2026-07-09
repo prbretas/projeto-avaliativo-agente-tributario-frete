@@ -1,11 +1,11 @@
 """
-Agente de Classificação Tributária de Frete
+AgenteClassTrib
 Ponto de entrada da aplicação.
 """
 
 
 def main():
-    print("Agente Tributário de Frete — iniciando...")
+    print("AgenteClassTrib — iniciando...")
 
 
 if __name__ == "__main__":

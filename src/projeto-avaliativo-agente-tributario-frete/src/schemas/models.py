@@ -1,5 +1,5 @@
 """
-Modelos de dados do Agente de Classificação Tributária de Frete.
+Modelos de dados do AgenteClassTrib.
 Todos os schemas Pydantic e o AgentState do LangGraph são definidos aqui.
 """
 from typing import TypedDict, Literal, Optional, Annotated

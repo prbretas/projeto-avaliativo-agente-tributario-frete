@@ -1,4 +1,4 @@
-# Requirements: Agente de Classificação Tributária de Frete (RAG + LangGraph)
+# Requirements: AgenteClassTrib (RAG + LangGraph)
 
 ## Contexto
 

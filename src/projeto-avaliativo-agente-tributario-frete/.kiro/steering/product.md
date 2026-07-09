@@ -2,7 +2,7 @@
 inclusion: always
 ---
 
-# Product Overview: Agente de Classificação Tributária de Frete (RAG + LangGraph)
+# Product Overview: AgenteClassTrib (RAG + LangGraph)
 
 ## Propósito
 

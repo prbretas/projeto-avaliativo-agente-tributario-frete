@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Cria labels padrao para o projeto
-REPO="prbretas/projeto-avaliativo-agente-tributario-frete"
+REPO="prbretas/agenteclasstrib"
 
 gh label create "story"           --repo "$REPO" --color "0052cc" --description "User Story" --force
 gh label create "chore"           --repo "$REPO" --color "e4e669" --description "Configuracao e setup" --force

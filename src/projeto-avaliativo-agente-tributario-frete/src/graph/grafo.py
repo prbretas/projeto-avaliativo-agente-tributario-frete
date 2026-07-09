@@ -1,5 +1,5 @@
 """
-Montagem do grafo LangGraph completo — Agente de Classificação Tributária de Frete.
+Montagem do grafo LangGraph completo — AgenteClassTrib.
 ISSUE-012: conecta todos os nós com StateGraph + edges condicionais.
 
 Fluxo:

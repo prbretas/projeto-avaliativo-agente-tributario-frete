@@ -1,4 +1,4 @@
-# Ata de reunião — Agente de Classificação Tributária de Frete
+# Ata de reunião — AgenteClassTrib
 
 ## Sessão de planejamento inicial — 04/07/2026
 

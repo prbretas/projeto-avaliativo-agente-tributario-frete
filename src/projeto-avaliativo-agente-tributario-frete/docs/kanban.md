@@ -1,4 +1,4 @@
-# Kanban — Agente de Classificação Tributária de Frete
+# Kanban — AgenteClassTrib
 
 Espelhar este quadro em GitHub Projects (ou Trello/Notion) usando as mesmas colunas. Cada card =
 uma issue de `tasks.md`. Regras de movimentação em `.kiro/steering/workflow.md`.
