@@ -46,24 +46,28 @@ Hoje o agente sugere a classificação mas não emite nada. Com essa integraçã
 
 ---
 
-### Feature 2 — Interface Gráfica Web (React + Vite)
+### Feature 2 — Interface Gráfica Web (React + Vite) + Integração mcp-transportation
 
-> **Escolha:** Opção A — React + Vite em pasta `frontend/`
+> **Escolha:** Opção A — React + Vite em pasta `frontend/`  
+> **Integração:** Opção C — Frontend unificado (sem alteração de backend)
 
 **Motivação:**  
 A interação atual é exclusivamente via Swagger UI ou cURL. Uma interface dedicada torna o sistema mais acessível para usuários não técnicos (contadores, operadores fiscais) e demonstra melhor o fluxo human-in-the-loop.
 
+Além disso, o projeto [mcp-transportation](https://github.com/prbretas/mcp-transportation) — servidor MCP com cálculo de carga tributária de frete — será integrado via frontend, sem alterar nenhum backend. O React chama os dois sistemas e compõe uma tela unificada com código fiscal (AgenteClassTrib) + valores monetários (mcp-transportation).
+
 **O que será feito:**
 - Criar pasta `frontend/` com projeto React + Vite + TypeScript
-- Habilitar CORS na FastAPI para `localhost:5173`
+- Habilitar CORS na FastAPI para `localhost:5173` (2 linhas em `api.py`)
 - Adicionar endpoint `GET /resultados` na API para listar histórico de outputs
+- Criar adapter HTTP Express no `mcp-transportation` (~30 linhas) para expor as ferramentas MCP via REST, já que o frontend não consegue chamar stdio diretamente
 
 **Telas planejadas:**
 
 | Tela | Descrição |
 |---|---|
 | **Formulário** | Campos do `POST /classificar` com validação e dropdowns para `modal`, `regime_tributario` e `origem_uf/destino_uf` |
-| **Resultado** | Exibe `cClassTrib`, alíquota, justificativa e fontes citadas — com botões "✅ Aprovar" e "❌ Rejeitar" |
+| **Resultado** | Exibe `cClassTrib`, alíquota, justificativa e fontes citadas (AgenteClassTrib) + valorIBS, valorCBS, comparativo antigo vs novo regime (mcp-transportation) — com botões "✅ Aprovar" e "❌ Rejeitar" |
 | **Comentário de rejeição** | Modal para inserir comentário antes de rejeitar |
 | **Histórico** | Lista paginada dos JSONs em `data/outputs/` com filtro por data e status |
 
@@ -72,6 +76,9 @@ A interação atual é exclusivamente via Swagger UI ou cURL. Uma interface dedi
 - TailwindCSS (estilização)
 - React Query (chamadas à API)
 - React Hook Form + Zod (validação do formulário)
+
+**Por que Opção C (e não integração backend)?**  
+Os dois backends (Python/FastAPI e Node.js/MCP) permanecem intocados — testados e funcionais. A integração acontece exclusivamente no frontend, que será desenvolvido do zero de qualquer forma. Zero risco de regressão.
 
 ---
 
@@ -120,11 +127,13 @@ data/
 | # | Feature | Complexidade | Impacto |
 |---|---|---|---|
 | 1 | Integração CT-e homologação (API terceiro) | Média | Alto — fluxo completo |
-| 2 | Interface gráfica React + Vite | Baixa-Média | Alto — usabilidade |
+| 2 | Interface gráfica React + Vite + integração mcp-transportation (Opção C) | Baixa-Média | Alto — usabilidade + dados combinados |
 | 3 | RAG incremental + scraping agendado | Média | Alto — manutenibilidade |
 
 **Ordem de implementação sugerida:** 2 → 3 → 1  
-(Interface primeiro porque é independente e de impacto imediato para demonstração)
+(Interface primeiro: independente, impacto imediato, e já integra o mcp-transportation sem tocar nos backends)
+
+> **Decisão de integração registrada:** A conexão com o [mcp-transportation](https://github.com/prbretas/mcp-transportation) será feita via **Opção C — Frontend unificado**. Nenhum backend é alterado. Ver análise completa em `docs/ESTUDO-INTEGRACAO-MCP.md`.
 
 ---
 
