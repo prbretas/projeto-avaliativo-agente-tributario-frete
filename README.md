@@ -7,7 +7,7 @@
 
 ## Problema
 
-Desde 03/08/2026, documentos fiscais de frete (CT-e) precisam ter os campos de IBS e CBS corretamente preenchidos para não serem rejeitados pela SEFAZ. O campo `cClassTrib` é obrigatório para empresas do regime regular, e opcional (com regras específicas) para o Simples Nacional. Classificar errado gera rejeição automática e retrabalho operacional.
+A partir de 03/08/2026, documentos fiscais de frete (CT-e) precisam ter os campos de IBS e CBS corretamente preenchidos para não serem rejeitados pela SEFAZ. O campo `cClassTrib` é obrigatório para empresas do regime regular, e opcional (com regras específicas) para o Simples Nacional. Classificar errado gera rejeição automática e retrabalho operacional.
 
 Este agente resolve esse problema: dado os dados de uma operação de frete, classifica o cenário tributário aplicável, sugere o `cClassTrib` e a alíquota correta, justifica com base na legislação real (LC 214/2025), e aguarda aprovação humana antes de exportar o resultado.
 
